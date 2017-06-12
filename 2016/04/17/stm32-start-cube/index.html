@@ -1,0 +1,785 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="stm32, cube, keil," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="stm32f103上电启动，并且使用cube库编写程序，实现对于串口的读写，开关检测以及中断相应。">
+<meta name="keywords" content="stm32, cube, keil">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32上电启动以及Cube库的程序编写">
+<meta property="og:url" content="www.wangkejie.me/2016/04/17/stm32-start-cube/index.html">
+<meta property="og:site_name" content="Kejie Wang">
+<meta property="og:description" content="stm32f103上电启动，并且使用cube库编写程序，实现对于串口的读写，开关检测以及中断相应。">
+<meta property="og:image" content="/images/stm32-start-cube/conn.png">
+<meta property="og:image" content="/images/stm32-start-cube/stm32-lib.png">
+<meta property="og:image" content="/images/stm32-start-cube/pin-def.png">
+<meta property="og:image" content="/images/stm32-start-cube/putty-setting.png">
+<meta property="og:updated_time" content="2017-06-12T07:43:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="STM32上电启动以及Cube库的程序编写">
+<meta name="twitter:description" content="stm32f103上电启动，并且使用cube库编写程序，实现对于串口的读写，开关检测以及中断相应。">
+<meta name="twitter:image" content="/images/stm32-start-cube/conn.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="www.wangkejie.me/2016/04/17/stm32-start-cube/"/>
+
+
+
+
+
+  <title>STM32上电启动以及Cube库的程序编写 | Kejie Wang</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kejie Wang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="www.wangkejie.me/2016/04/17/stm32-start-cube/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kejie Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kejie Wang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">STM32上电启动以及Cube库的程序编写</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-17T11:29:00+08:00">
+                2016-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/EmbededSystem/" itemprop="url" rel="index">
+                    <span itemprop="name">EmbededSystem</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  stm32f103上电启动，并且使用cube库编写程序，实现对于串口的读写，开关检测以及中断相应。
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="器材"><a href="#器材" class="headerlink" title="器材"></a>器材</h1><h2 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h2><ul>
+<li>STM32F103核心板板一块</li>
+<li>microUSB线一根(供电)</li>
+<li>STLink板或USB串口板一块</li>
+</ul>
+<h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h2><ul>
+<li>交叉编译软件。</li>
+<li>STM32CubeMX, Keil</li>
+<li>串口软件Putty</li>
+</ul>
+<h1 id="连接示意图"><a href="#连接示意图" class="headerlink" title="连接示意图"></a>连接示意图</h1><p><img src="/images/stm32-start-cube/conn.png" alt=""></p>
+<h1 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h1><h2 id="串口输出Hello"><a href="#串口输出Hello" class="headerlink" title="串口输出Hello"></a>串口输出Hello</h2><h3 id="STM32CubeMX"><a href="#STM32CubeMX" class="headerlink" title="STM32CubeMX"></a>STM32CubeMX</h3><p>首先安装STM32CubeMX，并且下载相应的STM32的库，由于实验中采用的是STM32F103C8，因此这里下载STM32F1的库，如下图所示<img src="/images/stm32-start-cube/stm32-lib.png" alt=""></p>
+<p>然后新建一个工程，选择正确的板子型号（STM32F103C8Tx），定义引脚，这里定义PA.09为USART1_TX，PA.10为USART1_RX，并且设定模式为异步，Hardware Flow Control为Disable<img src="/images/stm32-start-cube/pin-def.png" alt=""></p>
+<h3 id="Keil"><a href="#Keil" class="headerlink" title="Keil"></a>Keil</h3><p>再安装Keil软件，用来生成hex文件并且用其通过ST-LINK来下载到板子上运行。初次安装的时候需要下载相应的STM32设备包。</p>
+<p>打开main.c中可以看到串口的初始化函数，按照要求设定串口的波特率为9600，数据的宽度为8，停止位为一位，没有检验位，然后用HAL_UART_Init函数初始化。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* USART1 init function */</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">MX_USART1_UART_Init</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">  huart1.Instance = USART1;</div><div class="line">  huart1.Init.BaudRate = <span class="number">9600</span>;</div><div class="line">  huart1.Init.WordLength = UART_WORDLENGTH_8B;</div><div class="line">  huart1.Init.StopBits = UART_STOPBITS_1;</div><div class="line">  huart1.Init.Parity = UART_PARITY_NONE;</div><div class="line">  huart1.Init.Mode = UART_MODE_TX_RX;</div><div class="line">  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;</div><div class="line">  huart1.Init.OverSampling = UART_OVERSAMPLING_16;</div><div class="line">  HAL_UART_Init(&amp;huart1);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样子即可以采用HAL_UART_Transmit和HAL_UART_Receive两个函数进行串口的收发了。但是为了简单起见，这里重写了printf函数，以便可以用printf进行写入串口。重写int __io_putchar(int ch)和int fputc(int ch, FILE *f)两个函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __GNUC__</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> PUTCHAR_PROTOTYPE int __io_putchar(int ch)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">else</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* __GNUC__ */</span></span></div><div class="line">PUTCHAR_PROTOTYPE</div><div class="line">&#123;</div><div class="line"></div><div class="line">  HAL_UART_Transmit(&amp;huart1, (<span class="keyword">uint8_t</span> *)&amp;ch, <span class="number">1</span>, <span class="number">0xFFFF</span>);</div><div class="line">  <span class="keyword">return</span> ch;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样即可以采用 printf 函数进行串口发送数据了，在 main 中加入一行printf(“Hello”);先串口写入 Hello 的函数。</p>
+<h3 id="ST-LINK-下载"><a href="#ST-LINK-下载" class="headerlink" title="ST-LINK 下载"></a>ST-LINK 下载</h3><p>开始配置 Keil，打开设置后首先选定设备为 STM32F103C8，然后在Output中勾选Create HEX File选项。然后在解散ST-LINk之后可以在Debug选项中可以看到ST-LINK的调试器，并且打开设备可以看到相关的设备名字说明ST-LINK连接成功。在连接ST-LINK之前需要安装ST-LINK的驱动，然后在设备管理器中就可以看到已经成功挂载的设备。</p>
+<p>在以上设置完毕以后，编译源代码，然后选择Flash-&gt; download就可以下载了。</p>
+<h3 id="Putty"><a href="#Putty" class="headerlink" title="Putty"></a>Putty</h3><p>后采用串口软件Putty读取串口上的数据，设置串口的属性如下:<img src="/images/stm32-start-cube/putty-setting.png" alt=""></p>
+<p>打开串口，并且按下STM32上面的reset键就可以在串口上看到Hello字样</p>
+<h2 id="开关检测"><a href="#开关检测" class="headerlink" title="开关检测"></a>开关检测</h2><p>在STM32CubeMX中加入两个GPIO输入PA11和PA12，设定其为GPIO_Input</p>
+<p>然后在Keil中修改GPIO的初始化函数如下，设定PA11的方式为上拉输入，PA12为下降沿中断触发，初始化两个GPIO。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">MX_GPIO_Init</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">  GPIO_InitTypeDef GPIO_InitStruct;</div><div class="line"></div><div class="line">  <span class="comment">/* GPIO Ports Clock Enable */</span></div><div class="line">  __HAL_RCC_GPIOA_CLK_ENABLE();</div><div class="line"></div><div class="line">  <span class="comment">/*Configure GPIO pins : PA11 PA12 */</span></div><div class="line">  GPIO_InitStruct.Pin = GPIO_PIN_11;   </div><div class="line">    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;   </div><div class="line">    GPIO_InitStruct.Pull = GPIO_PULLUP;   </div><div class="line">    GPIO_InitStruct.Speed = GPIO_SPEED_LOW;   </div><div class="line">    HAL_GPIO_Init(GPIOA, &amp;GPIO_InitStruct);   </div><div class="line">    GPIO_InitStruct.Pin = GPIO_PIN_12;   </div><div class="line">    GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;   </div><div class="line">    GPIO_InitStruct.Pull = GPIO_PULLUP;   </div><div class="line">    GPIO_InitStruct.Speed = GPIO_SPEED_LOW;   </div><div class="line">    HAL_GPIO_Init(GPIOA, &amp;GPIO_InitStruct);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在main函数中加入GPIO的初始化函数，并且加入对于PA11的按下的检测函数，注意需要加上防抖动处理，否则会按下输出很多的Pressed</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (<span class="number">1</span>)</div><div class="line">&#123;</div><div class="line"> <span class="comment">/* USER CODE END WHILE */</span></div><div class="line"></div><div class="line"> <span class="comment">/* USER CODE BEGIN 3 */</span></div><div class="line">        <span class="keyword">if</span>(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == <span class="number">0</span>)</div><div class="line">        &#123;</div><div class="line">                HAL_Delay(<span class="number">100</span>);        <span class="comment">//anti-jitter</span></div><div class="line">                <span class="keyword">if</span>(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == <span class="number">0</span>)</div><div class="line">                &#123;</div><div class="line">                    <span class="built_in">printf</span>(<span class="string">"Pressed\r\n"</span>);</div><div class="line">                &#125;</div><div class="line">        &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>重新build工程，然后下载到板子上通过串口查看结果</p>
+<h2 id="PA12中断响应"><a href="#PA12中断响应" class="headerlink" title="PA12中断响应"></a>PA12<strong>中断响应</strong></h2><p>在上面PA11的基础上进行修改，因此这里不需要添加引脚，不用STM32CubeMX。</p>
+<p>首先配置PA12为下降边沿触发，在GPIO的初始化函数中如下设置</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">GPIO_InitStruct.Pin = GPIO_PIN_12;   </div><div class="line">GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;   </div><div class="line">GPIO_InitStruct.Pull = GPIO_PULLUP;   </div><div class="line">GPIO_InitStruct.Speed = GPIO_SPEED_LOW;   </div><div class="line">HAL_GPIO_Init(GPIOA, &amp;GPIO_InitStruct);</div></pre></td></tr></table></figure>
+<p>设置中断的优先级，enable中断向量 表处理，在main函数中添加以下代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">HAL_NVIC_SetPriority(EXTI15_10_IRQn, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);</div></pre></td></tr></table></figure>
+<p>当出现中断的时候，由于设定的引脚为PA12，因此当出现中断的时候，STM32会调用EXTI15_10_IRQHandler这个中断服务程序进行处理，我们在stm32f1xx_it.c中实现它，并在里面调用HAL_GPIO_EXTI_IRQHandler函数。由于上述函数会判断中断标志位并且调用HAL_GPIO_EXTI_Callback函数，因此我们将中断处理程序放在了HAL_GPIO_EXTI_Callback函数中进行实现</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">EXTI15_10_IRQHandler</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">    HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_12);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">HAL_GPIO_EXTI_Callback</span><span class="params">(<span class="keyword">uint16_t</span> GPIO_Pin)</span></span></div><div class="line">&#123;</div><div class="line">    flag = <span class="number">1</span>;</div><div class="line">    counter = counter + <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对于全局变量的定义，我们在main.c中定影了两个全局变量flag和counter，然后在stm32f1xx_it.c中用extern关键词声明这两个变量以此达到两个c文件共享全局变量的效果。</p>
+<p>然后在main的主循环中判断标志flag，如果其为1，则输出counter值，并且消除标志位。这里为了输出整形变量的值，我写了一个从unsigned int到字符串的函数，以便采用printf进行输出。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (<span class="number">1</span>)</div><div class="line">  &#123;</div><div class="line">  <span class="comment">/* USER CODE END WHILE */</span></div><div class="line">  <span class="comment">/* USER CODE BEGIN 3 */</span></div><div class="line">        <span class="keyword">if</span>(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == <span class="number">0</span>)</div><div class="line">        &#123;</div><div class="line">            HAL_Delay(<span class="number">100</span>);        <span class="comment">//anti-jitter</span></div><div class="line">            <span class="keyword">if</span>(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_11) == <span class="number">0</span>)</div><div class="line">            &#123;</div><div class="line">                    <span class="built_in">printf</span>(<span class="string">"Pressed\r\n"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(flag)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">char</span> s[<span class="number">33</span>];</div><div class="line">            toString(counter, s);</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"%s\r\n"</span>, s);</div><div class="line">            flag = <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">                </div><div class="line">  &#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">*transform a integer into a string</div><div class="line">*@num: The input number</div><div class="line">*@s: The string after transforming</div><div class="line">*@return void</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">toString</span><span class="params">(<span class="keyword">int</span> num, <span class="keyword">char</span> s[])</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> len = <span class="number">0</span>, tmp = num;</div><div class="line"><span class="keyword">if</span>(tmp==<span class="number">0</span>)</div><div class="line">    len=<span class="number">1</span>;</div><div class="line">    <span class="keyword">while</span>(tmp != <span class="number">0</span>)</div><div class="line">    &#123;</div><div class="line">        len++;</div><div class="line">        tmp /= <span class="number">10</span>;</div><div class="line">    &#125;</div><div class="line">    s[len--] = <span class="string">'\0'</span>;</div><div class="line">    <span class="keyword">while</span>(num != <span class="number">0</span>)</div><div class="line">    &#123;</div><div class="line">        s[len--] = (num%<span class="number">10</span>) + <span class="string">'0'</span>;</div><div class="line">        num /= <span class="number">10</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>重新编译代码，下板执行。通过下图可以看到，每次按下按钮会输出一个递增的数字，说明程序运行正确。</p>
+<h2 id="时钟中断"><a href="#时钟中断" class="headerlink" title="时钟中断"></a>时钟中断</h2><p>首先采用STM32CubeMX启用TIM3，并且采用内部时钟</p>
+<p>然后生成代码，用Keil打开工程。</p>
+<p>采用内部时钟，其频率为8MHz，配置时钟向上计数，计数到199，Prescaler的分频范围为0-65536，因此在这里设置为8000，，8MHz/8000 = 1000Hz = 1ms。</p>
+<p>修改MX_TIM3_Init函数体如下，分别设置时钟为TIM3，Prescaler为8000，计数模式为向上计数，周期为199，时钟为内部时钟以及复位模式。然后设置中断的优先级，enable中断向量表处理。最后初始化定时器。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* TIM3 init function */</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">MX_TIM3_Init</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">  TIM_ClockConfigTypeDef sClockSourceConfig;</div><div class="line">  TIM_MasterConfigTypeDef sMasterConfig;</div><div class="line">    </div><div class="line">    TIM_Handle.Instance = TIM3;   </div><div class="line">    TIM_Handle.Init.Prescaler = <span class="number">8000</span>;   </div><div class="line">    TIM_Handle.Init.CounterMode = TIM_COUNTERMODE_UP;   </div><div class="line">    TIM_Handle.Init.Period = <span class="number">199</span>;</div><div class="line"></div><div class="line">  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;</div><div class="line"> <span class="comment">// HAL_TIM_ConfigClockSource(&amp;TIM_Handle, &amp;sClockSourceConfig);</span></div><div class="line"></div><div class="line">  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;</div><div class="line">    HAL_NVIC_SetPriority(TIM3_IRQn, <span class="number">0</span>, <span class="number">0</span>);   </div><div class="line">    HAL_NVIC_EnableIRQ(TIM3_IRQn);</div><div class="line">    </div><div class="line">  HAL_TIM_Base_Init(&amp;TIM_Handle);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在stm32f1xx_hal_msp.c中的HAL_TIM_Base_MspInit中enable定时器时钟，在HAL_TIM_Base_MspDeInit中disable定时器时钟（如果采用STM32CubeMX生成，其会自动生成该代码，否则就需要自己添加）。</p>
+<p>由于定时器中断调用TIM3_IRQHandler函数，因此我们在stm32f1xx_it.c中编写中断服务程序TIM3_IRQHandler函数。由于在其中要用HAL_TIM_IRQHandler</p>
+<p>(&amp;TIM_Handle),因此在stm32f1xx_it.c采用extern申明TIM_Handle。由于该服务程序会调用HAL_TIM_PeriodElapsedCallback回调函数，因此在其中加入中断处理的程序。在这里我加的是一个将标志位置位，然后将一个全局变量加上10的一个操作。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">TIM3_IRQHandler</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">    HAL_TIM_IRQHandler(&amp;TIM_Handle); </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">HAL_TIM_PeriodElapsedCallback</span><span class="params">(TIM_HandleTypeDef *htim)</span></span></div><div class="line">&#123;</div><div class="line">    timeFlag = <span class="number">1</span>;</div><div class="line">    counter += <span class="number">10</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后在main中HAL_TIM_Base_Start_IT(&amp;TIM_Handle)启动定时器，在主循环中输出counter的值来检验定时中断。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> (<span class="number">1</span>)</div><div class="line">&#123;</div><div class="line"><span class="comment">/* USER CODE END WHILE */</span></div><div class="line"></div><div class="line"><span class="comment">/* USER CODE BEGIN 3 */</span></div><div class="line">      <span class="comment">//time interrupt</span></div><div class="line">      <span class="keyword">if</span>(timeFlag)</div><div class="line">      &#123;</div><div class="line">          <span class="keyword">char</span> s[<span class="number">33</span>];</div><div class="line">          toString(counter, s);</div><div class="line">          <span class="built_in">printf</span>(<span class="string">"%s\r\n"</span>, s);</div><div class="line">          timeFlag = <span class="number">0</span>;</div><div class="line">      &#125;</div><div class="line">      <span class="comment">/* USER CODE END 3 */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>重新编译代码，将其载入板子运行，通过串口观看结果。通过下图可以看到，串口上不断输出了以10递增的一些列数字，说明定时中断正常工作。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/stm32-cube-keil/" rel="tag"># stm32, cube, keil</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/09/rasp-zjuvpn/" rel="next" title="树莓派（Raspberry Pi）-浙大(ZJU)VPN连接">
+                <i class="fa fa-chevron-left"></i> 树莓派（Raspberry Pi）-浙大(ZJU)VPN连接
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/21/ucos-stm32-migration/" rel="prev" title="uC/OS-II在STM32F103上的移植">
+                uC/OS-II在STM32F103上的移植 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Kejie Wang" />
+          <p class="site-author-name" itemprop="name">Kejie Wang</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Kejie-Wang" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#器材"><span class="nav-number">1.</span> <span class="nav-text">器材</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件"><span class="nav-number">1.1.</span> <span class="nav-text">硬件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件"><span class="nav-number">1.2.</span> <span class="nav-text">软件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#连接示意图"><span class="nav-number">2.</span> <span class="nav-text">连接示意图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验步骤"><span class="nav-number">3.</span> <span class="nav-text">实验步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#串口输出Hello"><span class="nav-number">3.1.</span> <span class="nav-text">串口输出Hello</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#STM32CubeMX"><span class="nav-number">3.1.1.</span> <span class="nav-text">STM32CubeMX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Keil"><span class="nav-number">3.1.2.</span> <span class="nav-text">Keil</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ST-LINK-下载"><span class="nav-number">3.1.3.</span> <span class="nav-text">ST-LINK 下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Putty"><span class="nav-number">3.1.4.</span> <span class="nav-text">Putty</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开关检测"><span class="nav-number">3.2.</span> <span class="nav-text">开关检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PA12中断响应"><span class="nav-number">3.3.</span> <span class="nav-text">PA12中断响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时钟中断"><span class="nav-number">3.4.</span> <span class="nav-text">时钟中断</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kejie Wang</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
