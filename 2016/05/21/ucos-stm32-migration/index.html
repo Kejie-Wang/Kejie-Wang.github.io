@@ -90,13 +90,13 @@
 
 
 
-<meta name="description" content="uC/OS-II在STM32F103上的移植以及通过uC/OS对于GPIO进行操控，点亮LED等和七段数码管">
+<meta name="description" content="uC/OS工程的创建和移植先在官方下载uc/os的源代码，下载链接如下，注册之后即可以下载(注意IAR和MDK的区别，IAR版汇编的在MDK上汇编不兼容，改动会比较多) 然后在Keil中新建一个uCOS的工程，选择板子为STM32F103C8，选择CMSIS下的CORE和Device下的Startup，以及Device下的StdPeriph Drivers下的Framework，RCC，和GPIO">
 <meta name="keywords" content="uC&#x2F;OS, stm32">
 <meta property="og:type" content="article">
 <meta property="og:title" content="uC&#x2F;OS-II在STM32F103上的移植">
 <meta property="og:url" content="www.wangkejie.me/2016/05/21/ucos-stm32-migration/index.html">
 <meta property="og:site_name" content="Kejie Wang">
-<meta property="og:description" content="uC/OS-II在STM32F103上的移植以及通过uC/OS对于GPIO进行操控，点亮LED等和七段数码管">
+<meta property="og:description" content="uC/OS工程的创建和移植先在官方下载uc/os的源代码，下载链接如下，注册之后即可以下载(注意IAR和MDK的区别，IAR版汇编的在MDK上汇编不兼容，改动会比较多) 然后在Keil中新建一个uCOS的工程，选择板子为STM32F103C8，选择CMSIS下的CORE和Device下的Startup，以及Device下的StdPeriph Drivers下的Framework，RCC，和GPIO">
 <meta property="og:image" content="/images/ucos-stm32/led-demo.png">
 <meta property="og:image" content="/images/ucos-stm32/relationship.png">
 <meta property="og:image" content="/images/ucos-stm32/proj_struct.png">
@@ -104,10 +104,10 @@
 <meta property="og:image" content="/images/ucos-stm32/led.png">
 <meta property="og:image" content="/images/ucos-stm32/7seg-led-pin.png">
 <meta property="og:image" content="/images/ucos-stm32/7seg-display.jpg">
-<meta property="og:updated_time" content="2017-06-12T06:23:32.000Z">
+<meta property="og:updated_time" content="2017-06-13T10:13:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="uC&#x2F;OS-II在STM32F103上的移植">
-<meta name="twitter:description" content="uC/OS-II在STM32F103上的移植以及通过uC/OS对于GPIO进行操控，点亮LED等和七段数码管">
+<meta name="twitter:description" content="uC/OS工程的创建和移植先在官方下载uc/os的源代码，下载链接如下，注册之后即可以下载(注意IAR和MDK的区别，IAR版汇编的在MDK上汇编不兼容，改动会比较多) 然后在Keil中新建一个uCOS的工程，选择板子为STM32F103C8，选择CMSIS下的CORE和Device下的Startup，以及Device下的StdPeriph Drivers下的Framework，RCC，和GPIO">
 <meta name="twitter:image" content="/images/ucos-stm32/led-demo.png">
 
 
@@ -396,10 +396,6 @@
           
 
           
-              <div class="post-description">
-                  uC/OS-II在STM32F103上的移植以及通过uC/OS对于GPIO进行操控，点亮LED等和七段数码管
-              </div>
-          
 
         </div>
       </header>
@@ -414,6 +410,7 @@
         <h2 id="uC-OS工程的创建和移植"><a href="#uC-OS工程的创建和移植" class="headerlink" title="uC/OS工程的创建和移植"></a>uC/OS工程的创建和移植</h2><p>先在<a href="https://www.micrium.com/download/micrium_stm32xxx_ucos-ii/" target="_blank" rel="external">官方</a>下载uc/os的源代码，下载链接如下，注册之后即可以下载(注意IAR和MDK的区别，IAR版汇编的在MDK上汇编不兼容，改动会比较多)</p>
 <p>然后在Keil中新建一个uCOS的工程，选择板子为STM32F103C8，选择CMSIS下的CORE和Device下的Startup，以及Device下的StdPeriph Drivers下的Framework，RCC，和GPIO。新建完成后可以写一个简单的LED灯的Demo测试下灯和工程是否正常</p>
 <p><img src="/images/ucos-stm32/led-demo.png" alt=""></p>
+<a id="more"></a>
 <p>关于uCOS移植到STM32(Cortex-M3)具体可以参考官方的AN-1018文档。下图是uCOS移植到Cortex-M3的相关代码和模块之间的关系。其中最上面的是应用层，即是我们自己写的程序，然后下面是uCOS源代码，主要对应的是uCOS-II中的Src和Ports文件夹里面的代码。在工程目录和实际目录中新建Output, User和uCOS-II文件夹，分别对应上面的几个模块，其中Output用来作为工程的输出，在其中建立两个List和Obj两个文件夹，User下用户程序，User下图的BSP模块为官方的板级支持文件，这里不需要，uCOS-II下建立两个目录Src和Ports目录，分别和源代码对应。</p>
 <p><img src="/images/ucos-stm32/relationship.png" alt=""></p>
 <p>然后在工程的Options的Output下，Select Foldeer for Objects，选择 Output目录下的Obj文件夹，并且同时勾选Create HEX File，Listing目录下Select Folder for Listings选择Output目录下的List文件夹。</p>

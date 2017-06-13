@@ -289,7 +289,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="www.wangkejie.me/2017/06/12/vps/">
+    <link itemprop="mainEntityOfPage" href="www.wangkejie.me/2017/06/12/shadowsocks/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kejie Wang">
@@ -308,7 +308,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/12/vps/" itemprop="url">Shadowsocks服务器搭建以及不同终端的客户端配置</a></h1>
+                <a class="post-title-link" href="/2017/06/12/shadowsocks/" itemprop="url">Shadowsocks服务器搭建以及不同终端的客户端配置</a></h1>
         
 
         <div class="post-meta">
@@ -361,8 +361,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/06/12/vps/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="www.wangkejie.me/2017/06/12/vps/" itemprop="commentCount">0</span> comments
+                <a href="/2017/06/12/shadowsocks/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="www.wangkejie.me/2017/06/12/shadowsocks/" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
@@ -370,7 +370,7 @@
 
           
           
-             <span id="/2017/06/12/vps/" class="leancloud_visitors" data-flag-title="Shadowsocks服务器搭建以及不同终端的客户端配置">
+             <span id="/2017/06/12/shadowsocks/" class="leancloud_visitors" data-flag-title="Shadowsocks服务器搭建以及不同终端的客户端配置">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -399,10 +399,10 @@
 
       
         
-          众所周知，中国建立了强大的防火长城已禁止网民访问敏感网站，为此衍生出了大批的翻墙软件，诸如：Shadowsocks, GoAgent, Lantern……本文主要讲介绍目前使用最多的Shadowsocks在服务器端的安装以及在不同终端的客户端的配置
+          <p>众所周知，中国建立了强大的防火长城已禁止网民访问敏感网站，为此衍生出了大批的翻墙软件，诸如：Shadowsocks, GoAgent, Lantern……本文主要讲介绍目前使用最多的Shadowsocks在服务器端的安装以及在不同终端的客户端的配置<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/06/12/vps/">
+            <a class="btn" href="/2017/06/12/shadowsocks/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -558,10 +558,10 @@
 
       
         
-          在嵌入式Linux（树莓派）中如何使用已有的函数库编写应用程序操纵GPIO，如何编写字符设备驱动程序在内核程序中使用GPIO, 在外接的MAX7219进行显示
+          <p>主要是在嵌入式Linux（树莓派）中如何使用已有的函数库编写应用程序操纵GPIO，如何编写字符设备驱动程序在内核程序中使用GPIO<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/06/04/rasp-gpio/">
+            <a class="btn" href="/2016/06/04/rasp-gpio/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -854,10 +854,12 @@
 
       
         
-          uC/OS-II在STM32F103上的移植以及通过uC/OS对于GPIO进行操控，点亮LED等和七段数码管
+          <h2 id="uC-OS工程的创建和移植"><a href="#uC-OS工程的创建和移植" class="headerlink" title="uC/OS工程的创建和移植"></a>uC/OS工程的创建和移植</h2><p>先在<a href="https://www.micrium.com/download/micrium_stm32xxx_ucos-ii/" target="_blank" rel="external">官方</a>下载uc/os的源代码，下载链接如下，注册之后即可以下载(注意IAR和MDK的区别，IAR版汇编的在MDK上汇编不兼容，改动会比较多)</p>
+<p>然后在Keil中新建一个uCOS的工程，选择板子为STM32F103C8，选择CMSIS下的CORE和Device下的Startup，以及Device下的StdPeriph Drivers下的Framework，RCC，和GPIO。新建完成后可以写一个简单的LED灯的Demo测试下灯和工程是否正常</p>
+<p><img src="/images/ucos-stm32/led-demo.png" alt=""></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/05/21/ucos-stm32-migration/">
+            <a class="btn" href="/2016/05/21/ucos-stm32-migration/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1013,10 +1015,18 @@
 
       
         
-          stm32f103上电启动，并且使用cube库编写程序，实现对于串口的读写，开关检测以及中断相应。
+          <h1 id="器材"><a href="#器材" class="headerlink" title="器材"></a>器材</h1><h2 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h2><ul>
+<li>STM32F103核心板板一块</li>
+<li>microUSB线一根(供电)</li>
+<li>STLink板或USB串口板一块</li>
+</ul>
+<h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h2><ul>
+<li>交叉编译软件。</li>
+<li>STM32CubeMX, Keil</li>
+<li>串口软件Putty
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/04/17/stm32-start-cube/">
+            <a class="btn" href="/2016/04/17/stm32-start-cube/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1172,10 +1182,10 @@
 
       
         
-          树莓派二代连接浙大校园vpn
+          <p>连接上树莓派后，系统自动默认进入的是命令行模式，默认的用户名为：pi，密码：raspberry。<br>可以在刚刚启动的界面中进行修改为图形界面模式，然后sudo reboot后就进入可桌面模式。由于树莓派默认的为UK标准的键盘，会发现和外接键盘不匹配，可以将其修改成US的键盘。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/03/09/rasp-zjuvpn/">
+            <a class="btn" href="/2016/03/09/rasp-zjuvpn/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>

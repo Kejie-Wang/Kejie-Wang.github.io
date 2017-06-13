@@ -90,13 +90,13 @@
 
 
 
-<meta name="description" content="在嵌入式Linux（树莓派）中如何使用已有的函数库编写应用程序操纵GPIO，如何编写字符设备驱动程序在内核程序中使用GPIO, 在外接的MAX7219进行显示">
+<meta name="description" content="主要是在嵌入式Linux（树莓派）中如何使用已有的函数库编写应用程序操纵GPIO，如何编写字符设备驱动程序在内核程序中使用GPIO">
 <meta name="keywords" content="raspberry, gpio, 字符驱动程序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="树莓派上的GPIO字符驱动程序">
 <meta property="og:url" content="www.wangkejie.me/2016/06/04/rasp-gpio/index.html">
 <meta property="og:site_name" content="Kejie Wang">
-<meta property="og:description" content="在嵌入式Linux（树莓派）中如何使用已有的函数库编写应用程序操纵GPIO，如何编写字符设备驱动程序在内核程序中使用GPIO, 在外接的MAX7219进行显示">
+<meta property="og:description" content="主要是在嵌入式Linux（树莓派）中如何使用已有的函数库编写应用程序操纵GPIO，如何编写字符设备驱动程序在内核程序中使用GPIO">
 <meta property="og:image" content="/images/rasp-gpio/dev-conn.png">
 <meta property="og:image" content="/images/rasp-gpio/rasp-gpio-map.png">
 <meta property="og:image" content="/images/rasp-gpio/sys-eg.png">
@@ -105,10 +105,10 @@
 <meta property="og:image" content="/images/rasp-gpio/ch-zhong-img.png">
 <meta property="og:image" content="/images/rasp-gpio/bcm2825.png">
 <meta property="og:image" content="/images/rasp-gpio/linux-ch-driver.jpg">
-<meta property="og:updated_time" content="2017-06-12T06:50:35.000Z">
+<meta property="og:updated_time" content="2017-06-13T10:16:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="树莓派上的GPIO字符驱动程序">
-<meta name="twitter:description" content="在嵌入式Linux（树莓派）中如何使用已有的函数库编写应用程序操纵GPIO，如何编写字符设备驱动程序在内核程序中使用GPIO, 在外接的MAX7219进行显示">
+<meta name="twitter:description" content="主要是在嵌入式Linux（树莓派）中如何使用已有的函数库编写应用程序操纵GPIO，如何编写字符设备驱动程序在内核程序中使用GPIO">
 <meta name="twitter:image" content="/images/rasp-gpio/dev-conn.png">
 
 
@@ -397,10 +397,6 @@
           
 
           
-              <div class="post-description">
-                  在嵌入式Linux（树莓派）中如何使用已有的函数库编写应用程序操纵GPIO，如何编写字符设备驱动程序在内核程序中使用GPIO, 在外接的MAX7219进行显示
-              </div>
-          
 
         </div>
       </header>
@@ -412,7 +408,7 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>主要是在嵌入式Linux（树莓派）中如何使用已有的函数库编写应用程序操纵GPIO，如何编写字符设备驱动程序在内核程序中使用GPIO</p>
+        <p>主要是在嵌入式Linux（树莓派）中如何使用已有的函数库编写应用程序操纵GPIO，如何编写字符设备驱动程序在内核程序中使用GPIO<br><a id="more"></a></p>
 <h1 id="硬件连接图"><a href="#硬件连接图" class="headerlink" title="硬件连接图"></a>硬件连接图</h1><p><img src="/images/rasp-gpio/dev-conn.png" alt="树莓派和MAX7219连接图"></p>
 <h1 id="虚拟文件系统操作GPIO"><a href="#虚拟文件系统操作GPIO" class="headerlink" title="虚拟文件系统操作GPIO"></a>虚拟文件系统操作GPIO</h1><p>Linux可以通过访问sys/class/gpio下的一些文件，通过对这些文件的读写来实现对于GPIO的访问。<br>树莓派下面的可用的GPIO如下图所示(需要注意树莓派一代和二代的区别)：<br><img src="/images/rasp-gpio/rasp-gpio-map.png" alt=""><br>首先用一个小灯来测试下操作。首先向export中写入18，表示启用18号gpio端口，执行之后，可以看到该目录下多出了一个gpio18的目录。进入该目录后，先direction中写入out，表示该gpio作为输出，然后向value文件中写入1，表示其输出1，小灯的一端接gpio18，另一端接地，就可以看到小灯点亮。实验成功。<br><img src="/images/rasp-gpio/sys-eg.png" alt=""></p>
 <p>将其改装成用C操作文件的方式进行，这里我写了一个简单的库，包括gpio的export和unexport以及read和write:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//gpio_sys.h</span></div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _GPIO_SYS_H_</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> _GPIO_SYS_H_</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> BUFFMAX 3</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SYSFS_GPIO_EXPORT     <span class="meta-string">"/sys/class/gpio/export"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SYSFS_GPIO_UNEXPORT <span class="meta-string">"/sys/class/gpio/unexport"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SYSFS_GPIO_DIR_IN    0</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SYSFS_GPIO_DIR_OUT    1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SYSFS_GPIO_VAL_HIGH 1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SYSFS_GPIO_VAL_LOW    0</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> ERR(args...) fprintf(stderr, <span class="meta-string">"%s\n"</span>, args);</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">GPIOExport</span><span class="params">(<span class="keyword">int</span> pin)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">GPIOUnexport</span><span class="params">(<span class="keyword">int</span> pin)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">GPIODirection</span><span class="params">(<span class="keyword">int</span> pin, <span class="keyword">int</span> dir)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">GPIORead</span><span class="params">(<span class="keyword">int</span> pin)</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">GPIOWrite</span><span class="params">(<span class="keyword">int</span> pin, <span class="keyword">int</span> value)</span></span>;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure></p>
@@ -492,7 +488,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/12/vps/" rel="prev" title="Shadowsocks服务器搭建以及不同终端的客户端配置">
+              <a href="/2017/06/12/shadowsocks/" rel="prev" title="Shadowsocks服务器搭建以及不同终端的客户端配置">
                 Shadowsocks服务器搭建以及不同终端的客户端配置 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -641,7 +637,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件连接图"><span class="nav-number">2.</span> <span class="nav-text">硬件连接图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟文件系统操作GPIO"><span class="nav-number">3.</span> <span class="nav-text">虚拟文件系统操作GPIO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符驱动程序"><span class="nav-number">4.</span> <span class="nav-text">字符驱动程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">5.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件连接图"><span class="nav-number">1.</span> <span class="nav-text">硬件连接图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟文件系统操作GPIO"><span class="nav-number">2.</span> <span class="nav-text">虚拟文件系统操作GPIO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符驱动程序"><span class="nav-number">3.</span> <span class="nav-text">字符驱动程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
             
 
           </div>

@@ -94,14 +94,14 @@
 <meta name="keywords" content="shadowsocks, vps">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Shadowsocks服务器搭建以及不同终端的客户端配置">
-<meta property="og:url" content="www.wangkejie.me/2017/06/12/vps/index.html">
+<meta property="og:url" content="www.wangkejie.me/2017/06/12/shadowsocks/index.html">
 <meta property="og:site_name" content="Kejie Wang">
 <meta property="og:description" content="众所周知，中国建立了强大的防火长城已禁止网民访问敏感网站，为此衍生出了大批的翻墙软件，诸如：Shadowsocks, GoAgent, Lantern……本文主要讲介绍目前使用最多的Shadowsocks在服务器端的安装以及在不同终端的客户端的配置">
 <meta property="og:image" content="/images/shadowsocks/shadowsocks.png">
 <meta property="og:image" content="/images/shadowsocks/server.png">
 <meta property="og:image" content="/images/shadowsocks/switchyomega_proxy.png">
 <meta property="og:image" content="/images/shadowsocks/switchyomega_autoswitch.png">
-<meta property="og:updated_time" content="2017-06-12T14:28:58.000Z">
+<meta property="og:updated_time" content="2017-06-13T10:30:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shadowsocks服务器搭建以及不同终端的客户端配置">
 <meta name="twitter:description" content="众所周知，中国建立了强大的防火长城已禁止网民访问敏感网站，为此衍生出了大批的翻墙软件，诸如：Shadowsocks, GoAgent, Lantern……本文主要讲介绍目前使用最多的Shadowsocks在服务器端的安装以及在不同终端的客户端的配置">
@@ -133,7 +133,7 @@
 
 
 
-  <link rel="canonical" href="www.wangkejie.me/2017/06/12/vps/"/>
+  <link rel="canonical" href="www.wangkejie.me/2017/06/12/shadowsocks/"/>
 
 
 
@@ -297,7 +297,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="www.wangkejie.me/2017/06/12/vps/">
+    <link itemprop="mainEntityOfPage" href="www.wangkejie.me/2017/06/12/shadowsocks/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kejie Wang">
@@ -367,8 +367,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/06/12/vps/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="www.wangkejie.me/2017/06/12/vps/" itemprop="commentCount">0</span> comments
+                <a href="/2017/06/12/shadowsocks/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="www.wangkejie.me/2017/06/12/shadowsocks/" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
@@ -376,7 +376,7 @@
 
           
           
-             <span id="/2017/06/12/vps/" class="leancloud_visitors" data-flag-title="Shadowsocks服务器搭建以及不同终端的客户端配置">
+             <span id="/2017/06/12/shadowsocks/" class="leancloud_visitors" data-flag-title="Shadowsocks服务器搭建以及不同终端的客户端配置">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -393,10 +393,6 @@
           
 
           
-              <div class="post-description">
-                  众所周知，中国建立了强大的防火长城已禁止网民访问敏感网站，为此衍生出了大批的翻墙软件，诸如：Shadowsocks, GoAgent, Lantern……本文主要讲介绍目前使用最多的Shadowsocks在服务器端的安装以及在不同终端的客户端的配置
-              </div>
-          
 
         </div>
       </header>
@@ -408,16 +404,16 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>众所周知，中国建立了强大的防火长城已禁止网民访问敏感网站，为此衍生出了大批的翻墙软件，诸如：Shadowsocks, GoAgent, Lantern……本文主要讲介绍目前使用最多的Shadowsocks在服务器端的安装以及在不同终端的客户端的配置</p>
+        <p>众所周知，中国建立了强大的防火长城已禁止网民访问敏感网站，为此衍生出了大批的翻墙软件，诸如：Shadowsocks, GoAgent, Lantern……本文主要讲介绍目前使用最多的Shadowsocks在服务器端的安装以及在不同终端的客户端的配置<br><a id="more"></a></p>
 <h1 id="Shadowsocks服务器搭建"><a href="#Shadowsocks服务器搭建" class="headerlink" title="Shadowsocks服务器搭建"></a>Shadowsocks服务器搭建</h1><h2 id="vps获取"><a href="#vps获取" class="headerlink" title="vps获取"></a>vps获取</h2><p>对于翻墙的前提就是需要一台在国外的服务器。对于专业的用户可以自行购买vps进行配置，目前作者采用的是<a href="https://bwh1.net/" target="_blank" rel="external"><strong><em>搬瓦工</em></strong></a>的vps，这个价格相对比较便宜，有和中国电信直连的线路，而且支持支付宝付款。对于购买搬瓦工的用户，推荐购买最新推出的KVM架构的服务器，这样可以安装锐速进行加速。另一个作者使用过的为<a href="https://www.vultr.com/" target="_blank" rel="external"><strong><em>vultr</em></strong></a>，价格相对较贵，但是部署服务器较为灵活，按小时进行计费，速度也相对较快。如果对于linux不是很熟悉也可以直接购买第三方提供的Shadowsocks的账号。</p>
 <h2 id="服务器搭建"><a href="#服务器搭建" class="headerlink" title="服务器搭建"></a>服务器搭建</h2><p>在安装完服务器系统后启动系统ssh连接到服务器，搬瓦工服务器同时也提供了一键安装Shadowsocks服务器的功能，这里主要介绍自行安装。</p>
 <p>对于Shadowsocks服务端推荐安装<a href="https://github.com/shadowsocks/shadowsocks-libev" target="_blank" rel="external"><em>shadowsocks-libev</em></a>，按照其提示安装完之后</p>
 <p>建立一个shadowsocks-config.json文件，写入一下内容：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    "server":"server_ip",   # server ip</div><div class="line">    "server_port":65432,     # server port</div><div class="line">    "password":"password",   # password</div><div class="line">    "timeout":60,            </div><div class="line">    "method":"aes-256-cfb" </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    "server":"server_ip",   # server ip</div><div class="line">    "server_port":65432,     # server port</div><div class="line">    "password":"password",   # password</div><div class="line">    "timeout":60,            </div><div class="line">    "method":"aes-256-cfb"</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>其中server_ip填入vps的ip地址，server_port自定义一个未被占用的端口，password自定义一个密码</p>
 <p>然后通过ss-server命令启动：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ss-server -c shadowsocks-config.json -f /tmp/ss.pid</div></pre></td></tr></table></figure>
-<h1 id="客户端搭建"><a href="#客户端搭建" class="headerlink" title="客户端搭建"></a>客户端搭建</h1><h2 id="Mac-amp-Windows"><a href="#Mac-amp-Windows" class="headerlink" title="Mac &amp; Windows"></a>Mac &amp; Windows</h2><p>Shadowsocks都提供了Mac和Windows的GUI客户端</p>
+<h1 id="客户端搭建"><a href="#客户端搭建" class="headerlink" title="客户端搭建"></a>客户端搭建</h1><h2 id="Mac-amp-Windows"><a href="#Mac-amp-Windows" class="headerlink" title="Mac &amp; Windows"></a>Mac &amp; Windows</h2><p>Shadowsocks都提供了<a href="/uploads/shadowsocks/MaxOS/ShadowsocksX-2.6.3.dmg"><strong><em>Mac</em></strong></a>和<a href="/uploads/shadowsocks/Windows/Shadowsocks-3.3.5.zip"><strong><em>Windows</em></strong></a>的GUI客户端</p>
 <p>下载安装完毕之后，会出现一个纸飞机的小图标即是shadowsocks，单击出现以下:<img src="/images/shadowsocks/shadowsocks.png" alt=""></p>
 <p>打开shadowsocks后选择模式为Auto Proxy Mode(这样不用翻墙的网站就可以不用走代理了)，</p>
 <p>然后添加服务器，如下图所示，将服务器的地址，端口号，加密方式以及密码填入</p>
@@ -526,7 +522,7 @@
   <div class="comments" id="comments">
     
       <div class="fb-comments"
-           data-href="www.wangkejie.me/2017/06/12/vps/"
+           data-href="www.wangkejie.me/2017/06/12/shadowsocks/"
            data-numposts="10"
            data-width="100%"
            data-colorscheme="light">
@@ -646,7 +642,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shadowsocks服务器搭建"><span class="nav-number">2.</span> <span class="nav-text">Shadowsocks服务器搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vps获取"><span class="nav-number">2.1.</span> <span class="nav-text">vps获取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器搭建"><span class="nav-number">2.2.</span> <span class="nav-text">服务器搭建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#客户端搭建"><span class="nav-number">3.</span> <span class="nav-text">客户端搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mac-amp-Windows"><span class="nav-number">3.1.</span> <span class="nav-text">Mac & Windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">3.2.</span> <span class="nav-text">Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS"><span class="nav-number">3.3.</span> <span class="nav-text">iOS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome"><span class="nav-number">3.4.</span> <span class="nav-text">Chrome</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#终端"><span class="nav-number">3.5.</span> <span class="nav-text">终端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac"><span class="nav-number">3.5.1.</span> <span class="nav-text">Mac</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-1"><span class="nav-number">3.5.2.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下载源代码"><span class="nav-number">3.5.2.1.</span> <span class="nav-text">下载源代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译安装"><span class="nav-number">3.5.2.2.</span> <span class="nav-text">编译安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加配置文件"><span class="nav-number">3.5.2.3.</span> <span class="nav-text">添加配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试和使用"><span class="nav-number">3.5.2.4.</span> <span class="nav-text">测试和使用</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Shadowsocks服务器搭建"><span class="nav-number">1.</span> <span class="nav-text">Shadowsocks服务器搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vps获取"><span class="nav-number">1.1.</span> <span class="nav-text">vps获取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器搭建"><span class="nav-number">1.2.</span> <span class="nav-text">服务器搭建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#客户端搭建"><span class="nav-number">2.</span> <span class="nav-text">客户端搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mac-amp-Windows"><span class="nav-number">2.1.</span> <span class="nav-text">Mac & Windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">2.2.</span> <span class="nav-text">Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS"><span class="nav-number">2.3.</span> <span class="nav-text">iOS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome"><span class="nav-number">2.4.</span> <span class="nav-text">Chrome</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#终端"><span class="nav-number">2.5.</span> <span class="nav-text">终端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac"><span class="nav-number">2.5.1.</span> <span class="nav-text">Mac</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-1"><span class="nav-number">2.5.2.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下载源代码"><span class="nav-number">2.5.2.1.</span> <span class="nav-text">下载源代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译安装"><span class="nav-number">2.5.2.2.</span> <span class="nav-text">编译安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加配置文件"><span class="nav-number">2.5.2.3.</span> <span class="nav-text">添加配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试和使用"><span class="nav-number">2.5.2.4.</span> <span class="nav-text">测试和使用</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
