@@ -585,6 +585,132 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="www.wangkejie.me/2016/05/27/linux-pthread-socket/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kejie Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kejie Wang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/05/27/linux-pthread-socket/" itemprop="url">Linux下的基于Pthread的多线程Socket编程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-27T03:19:00+08:00">
+                2016-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/05/27/linux-pthread-socket/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="www.wangkejie.me/2016/05/27/linux-pthread-socket/" itemprop="commentCount">0</span> comments
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          本文主要基于Linux下的Pthread实现了一个服务器和客户端通过socket进行通信的系统。服务端的程序的设计主要是一个主线程首先调用Socket相关的函数socket，bind， listen在建立服务端的Socket之后，等待Accept上面，如果有新的客户端连接上来，则对于每一个客户端新建一个线程。在每一个客户端的线程中，其接收客户端发送的指令然后返回相关的信息，主线程Socket中默认的Accpet默认是阻塞的，这里采用了Linux中函数fctnl将其设置成非阻塞。除了客户端对应的线程和主线程之外，服务端还存在一个服务端的控制线程，其主要是接受服务端的命令，诸如退出，断开连接等等，对服务端的程序进行控制。客户端的程序为一个阻塞的循环，接受用户的输入然后解析命令进行相关的操作，诸如连接服务端，发送数据等等操作。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/05/27/linux-pthread-socket/">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="www.wangkejie.me/2016/05/21/ucos-stm32-migration/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1065,7 +1191,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1087,7 +1213,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
