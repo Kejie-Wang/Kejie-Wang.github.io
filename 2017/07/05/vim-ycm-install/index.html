@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="raspberry pi, 浙大, vpn," />
+  <meta name="keywords" content="vim, plugin, YouCompleteMe," />
 
 
 
@@ -90,20 +90,19 @@
 
 
 
-<meta name="description" content="连接上树莓派后，系统自动默认进入的是命令行模式，默认的用户名为：pi，密码：raspberry。可以在刚刚启动的界面中进行修改为图形界面模式，然后sudo reboot后就进入可桌面模式。由于树莓派默认的为UK标准的键盘，会发现和外接键盘不匹配，可以将其修改成US的键盘。">
-<meta name="keywords" content="raspberry pi, 浙大, vpn">
+<meta name="description" content="YouCompleteMe (YCM) is a fast, powerful code completion engine for vim. But unlike the other vim plugins which are easy to install, YCM needs to complier to install. This article will briefly introduc">
+<meta name="keywords" content="vim, plugin, YouCompleteMe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="树莓派（Raspberry Pi）-浙大(ZJU)VPN连接">
-<meta property="og:url" content="www.wangkejie.me/2016/03/09/rasp-zjuvpn/index.html">
+<meta property="og:title" content="A vim autocomplete plugin - YouCompleteMe installation guide">
+<meta property="og:url" content="www.wangkejie.me/2017/07/05/vim-ycm-install/index.html">
 <meta property="og:site_name" content="Kejie Wang">
-<meta property="og:description" content="连接上树莓派后，系统自动默认进入的是命令行模式，默认的用户名为：pi，密码：raspberry。可以在刚刚启动的界面中进行修改为图形界面模式，然后sudo reboot后就进入可桌面模式。由于树莓派默认的为UK标准的键盘，会发现和外接键盘不匹配，可以将其修改成US的键盘。">
-<meta property="og:image" content="/images/rasp-zju-vpn/addr-change.png">
-<meta property="og:image" content="/images/rasp-zju-vpn/ping-cc98.png">
-<meta property="og:updated_time" content="2017-06-13T10:16:57.000Z">
+<meta property="og:description" content="YouCompleteMe (YCM) is a fast, powerful code completion engine for vim. But unlike the other vim plugins which are easy to install, YCM needs to complier to install. This article will briefly introduc">
+<meta property="og:image" content="/images/vim-ycm-install/test.png">
+<meta property="og:updated_time" content="2017-07-05T05:14:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="树莓派（Raspberry Pi）-浙大(ZJU)VPN连接">
-<meta name="twitter:description" content="连接上树莓派后，系统自动默认进入的是命令行模式，默认的用户名为：pi，密码：raspberry。可以在刚刚启动的界面中进行修改为图形界面模式，然后sudo reboot后就进入可桌面模式。由于树莓派默认的为UK标准的键盘，会发现和外接键盘不匹配，可以将其修改成US的键盘。">
-<meta name="twitter:image" content="/images/rasp-zju-vpn/addr-change.png">
+<meta name="twitter:title" content="A vim autocomplete plugin - YouCompleteMe installation guide">
+<meta name="twitter:description" content="YouCompleteMe (YCM) is a fast, powerful code completion engine for vim. But unlike the other vim plugins which are easy to install, YCM needs to complier to install. This article will briefly introduc">
+<meta name="twitter:image" content="/images/vim-ycm-install/test.png">
 
 
 
@@ -131,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="www.wangkejie.me/2016/03/09/rasp-zjuvpn/"/>
+  <link rel="canonical" href="www.wangkejie.me/2017/07/05/vim-ycm-install/"/>
 
 
 
 
 
-  <title>树莓派（Raspberry Pi）-浙大(ZJU)VPN连接 | Kejie Wang</title>
+  <title>A vim autocomplete plugin - YouCompleteMe installation guide | Kejie Wang</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -295,7 +294,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="www.wangkejie.me/2016/03/09/rasp-zjuvpn/">
+    <link itemprop="mainEntityOfPage" href="www.wangkejie.me/2017/07/05/vim-ycm-install/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kejie Wang">
@@ -312,7 +311,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">树莓派（Raspberry Pi）-浙大(ZJU)VPN连接</h1>
+          <h1 class="post-title" itemprop="name headline">A vim autocomplete plugin - YouCompleteMe installation guide</h1>
         
 
         <div class="post-meta">
@@ -324,8 +323,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-09T23:32:00+08:00">
-                2016-03-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-05T13:14:32+08:00">
+                2017-07-05
               </time>
             
 
@@ -335,28 +334,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/EmbededSystem/" itemprop="url" rel="index">
-                    <span itemprop="name">EmbededSystem</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -365,8 +342,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/03/09/rasp-zjuvpn/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="www.wangkejie.me/2016/03/09/rasp-zjuvpn/" itemprop="commentCount">0</span> comments
+                <a href="/2017/07/05/vim-ycm-install/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="www.wangkejie.me/2017/07/05/vim-ycm-install/" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
@@ -374,7 +351,7 @@
 
           
           
-             <span id="/2016/03/09/rasp-zjuvpn/" class="leancloud_visitors" data-flag-title="树莓派（Raspberry Pi）-浙大(ZJU)VPN连接">
+             <span id="/2017/07/05/vim-ycm-install/" class="leancloud_visitors" data-flag-title="A vim autocomplete plugin - YouCompleteMe installation guide">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -402,14 +379,71 @@
       
 
       
-        <p>连接上树莓派后，系统自动默认进入的是命令行模式，默认的用户名为：pi，密码：raspberry。<br>可以在刚刚启动的界面中进行修改为图形界面模式，然后sudo reboot后就进入可桌面模式。由于树莓派默认的为UK标准的键盘，会发现和外接键盘不匹配，可以将其修改成US的键盘。<br><a id="more"></a></p>
-<h1 id="连接内网"><a href="#连接内网" class="headerlink" title="连接内网"></a>连接内网</h1><p>关于树莓派的VPN联网，现在玉泉的有线需要申请固定的ip的，网络ip地址申请完成后。<br>首先需要将树莓派的网卡的Mac地址改成申请的地址，或者使用其地址申请（ifconfig命令查看）<br>修改的方法为如下图所示<br><img src="/images/rasp-zju-vpn/addr-change.png" alt=""><br>然后设置VPN的一些参数：<br>设置ip地址<br>将网线插上后，执行下列命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> sudo ip addr flush dev eth0</div><div class="line"><span class="meta">$</span> sudo ip addr add dev eth0 $I/$U</div></pre></td></tr></table></figure></p>
-<p>其中$I用你的ip静态ip地址代替，$U用你的子网掩码的前导1的个数代替（如果数不清楚的话，把你的子网掩码转换成二进制数，然后从最高位开始数1的个数）<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> sudo ip route replace default via $D</div></pre></td></tr></table></figure></p>
-<p>$D用你的默认网关代替<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> sudo nano /etc/resolv.conf</div><div class="line"><span class="meta">$</span> nameserver $DNS</div></pre></td></tr></table></figure></p>
-<p>$DNS用DNS服务器代替<br>设置完成之后就可以尝试ping下cc98<br><img src="/images/rasp-zju-vpn/ping-cc98.png" alt=""></p>
-<h1 id="连接外网"><a href="#连接外网" class="headerlink" title="连接外网"></a>连接外网</h1><p>上面已经将树莓派连接上了内网，如果需要访问外网需要配置vpn。下载安装包，使用U盘将其拷贝到Raspberry Pi中去，解压后执行以下的命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> sudo dpkg –i libpcap0.8_1.3.0-1_armhf.deb</div><div class="line"><span class="meta">$</span> sudo dpkg –i ppp_2.4.5-5.1_armhf.deb</div><div class="line"><span class="meta">$</span> sudo dpkg –i xl2tpd_1.3.1+dfsg-1_armhf.deb</div><div class="line"><span class="meta">$</span> tar –zxvf zjuvpn-8.2.tar.gz –C /</div><div class="line"><span class="meta">$</span> sudo zjuvpn -c</div></pre></td></tr></table></figure></p>
-<p>然后输入用户名和密码就可以上网了，ping下度娘测试下外网有没有用吧</p>
-<p>对于/ect/resolv.conf文件会被重写的问题可以执行以下命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> aptitude purge dhcpcd5</div></pre></td></tr></table></figure></p>
+        <p><a href="http://valloric.github.io/YouCompleteMe/#intro" target="_blank" rel="external">YouCompleteMe</a> (YCM) is a fast, powerful code completion engine for vim. But unlike the other vim plugins which are easy to install, YCM needs to complier to install. This article will briefly introduce the full installation guide of YCM.</p>
+<a id="more"></a>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>Before you install the ycm, make sure the follow packages have been installed:</p>
+<h3 id="Vim"><a href="#Vim" class="headerlink" title="Vim"></a>Vim</h3><p>Ensure that your version of Vim is at least <strong>7.4.1578</strong> and that is has support for Python 2 or Python 3 scripting. Enter <code>vim -version</code> in the terminal to check the vim version. Typpe<code>vim --version | grep python</code> to check the Python support. If a plus(+) not a minus (-) before Python2 or Python3, then the vim support Python. If not, follow the guide to install vim8.0 with Python support.</p>
+<ul>
+<li><p>Download the <a href="https://github.com/vim/vim" target="_blank" rel="external">vim</a> source</p>
+<p><code>git clone https://github.com/vim/vim.git</code></p>
+</li>
+<li><p>Configure and Install</p>
+<p><code>cd vim &amp;&amp; ./configure --enable-pythoninterp --with-python-config-dir=/home/kjwang/anaconda2/lib/python2.7/config</code></p>
+<p><code>make &amp;&amp; make install</code></p>
+</li>
+</ul>
+<h3 id="Vundle"><a href="#Vundle" class="headerlink" title="Vundle"></a>Vundle</h3><p>Vundle is a vim plugin manager and follow the installion guide in <a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="external">Vundle</a> to install.</p>
+<h2 id="Install-YCM"><a href="#Install-YCM" class="headerlink" title="Install YCM"></a>Install YCM</h2><p>Install YCM with Vundle is a recommended way. WithVundle, adding a <code>Plugin &#39;Valloric/YouCompleteMe&#39;</code> line to your <a href="http://vimhelp.appspot.com/starting.txt.html#vimrc" target="_blank" rel="external">vimrc</a> and execute <code>PluginInstall</code> in vim.</p>
+<p>And the enter the YCM repository directory and run follow command to fetch the YCM’s dependencies.</p>
+<p><code>git submodule update --init --recursive</code></p>
+<h2 id="Install-libclang"><a href="#Install-libclang" class="headerlink" title="Install libclang"></a>Install libclang</h2><p>The semantic completion for C-family languages need libclang and you can jump this step if you do NOT need it.</p>
+<h3 id="Using-the-pre-built-binary"><a href="#Using-the-pre-built-binary" class="headerlink" title="Using the pre-built binary"></a>Using the pre-built binary</h3><p>Download the pre-built binary from <a href="http://releases.llvm.org/download.html" target="_blank" rel="external">llvm</a> for your corresponding system. But sometimes this can be failed for some different dependencies version and you can build from the source. </p>
+<h3 id="Compile-from-source"><a href="#Compile-from-source" class="headerlink" title="Compile from source"></a>Compile from source</h3><ul>
+<li><p>Download the source code from <a href="http://releases.llvm.org/download.html" target="_blank" rel="external">llvm</a></p>
+<p>Download the llvm, clang, compiler-rt and clang-tools-extra packages and extract the source code.</p>
+<p><code>wget http://releases.llvm.org/4.0.1/llvm-4.0.1.src.tar.xz</code></p>
+<p><code>wget http://releases.llvm.org/4.0.1/cfe-4.0.1.src.tar.xz</code></p>
+<p><code>wget http://releases.llvm.org/4.0.1/compiler-rt-4.0.1.src.tar.xz</code></p>
+<p><code>wget http://releases.llvm.org/4.0.1/clang-tools-extra-4.0.1.src.tar.xz</code></p>
+</li>
+<li><p>Move the source code</p>
+<p><code>mv llvm-4.0.1.src llvm</code></p>
+<p><code>mv cfe-4.0.1.src llvm/tools/clang</code></p>
+<p><code>mv clang-tools-extra-4.0.1.src llvm/tools/clang/tools/extra</code></p>
+<p><code>mv compiler-rt-4.0.1.src llvm/projects/compiler-rt</code></p>
+</li>
+<li><p>Build the LLVM and clang</p>
+<p><code>mkdir build &amp;&amp; cd build</code></p>
+<p><code>cmake -G &quot;Unix Makefiles&quot; ../llvm</code></p>
+</li>
+</ul>
+<h2 id="Compile-the-ycm-core"><a href="#Compile-the-ycm-core" class="headerlink" title="Compile the ycm_core"></a>Compile the <em>ycm_core</em></h2><p>Before you compile the ycm_core, make sure that the <a href="https://cmake.org/download/" target="_blank" rel="external">cmake</a> has been installed.</p>
+<ul>
+<li><p>Create the build directory</p>
+<p><code>mkdir ~/ycm_build &amp;&amp; cd ~/ycm_build</code></p>
+</li>
+<li><p>Generate the makefiles</p>
+<ul>
+<li><p>No semantic support</p>
+<p><code>cmake -G &quot;Unix Makefiles&quot; . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp</code></p>
+</li>
+<li><p>Semantic support</p>
+<p><code>cmake -G &quot;Unix Makefiles&quot; -DPATH_TO_LLVM_ROOT=llvm_root_dir . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp</code></p>
+<p>Where <strong><em>llvm_root_dir</em></strong> is the root dir where you extract the downloaded binary distribution.</p>
+</li>
+</ul>
+</li>
+<li><p>Compile</p>
+<p><code>cmake --build . --target ycm_core --config Release</code></p>
+</li>
+</ul>
+<p>Now you can find the <strong><em>ycm_core</em></strong> in <strong><em>~/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so</em></strong></p>
+<h2 id="Test-Installation"><a href="#Test-Installation" class="headerlink" title="Test Installation"></a>Test Installation</h2><p>Open a test file and enter some words to check whether it works.</p>
+<p><img src="/images/vim-ycm-install/test.png" alt=""></p>
+<h2 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a>Issues</h2><h3 id="GLIBC-Error"><a href="#GLIBC-Error" class="headerlink" title="GLIBC Error"></a>GLIBC Error</h3><p>I use the python from anaconda2 and there is an problem when I finish the installation.</p>
+<p><code>lib/libstdc++.so.6: version &#39;GLIBCXX_3.4.20&#39; not found</code></p>
+<p>Install the libgcc package to solve</p>
+<p><code>conda install libgcc</code></p>
 
       
     </div>
@@ -439,7 +473,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/raspberry-pi-浙大-vpn/" rel="tag"># raspberry pi, 浙大, vpn</a>
+            <a href="/tags/vim-plugin-YouCompleteMe/" rel="tag"># vim, plugin, YouCompleteMe</a>
           
         </div>
       
@@ -452,15 +486,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/06/12/shadowsocks/" rel="next" title="Shadowsocks服务器搭建以及不同终端的客户端配置">
+                <i class="fa fa-chevron-left"></i> Shadowsocks服务器搭建以及不同终端的客户端配置
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/17/stm32-start-cube/" rel="prev" title="STM32上电启动以及Cube库的程序编写">
-                STM32上电启动以及Cube库的程序编写 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -487,7 +521,7 @@
   <div class="comments" id="comments">
     
       <div class="fb-comments"
-           data-href="www.wangkejie.me/2016/03/09/rasp-zjuvpn/"
+           data-href="www.wangkejie.me/2017/07/05/vim-ycm-install/"
            data-numposts="10"
            data-width="100%"
            data-colorscheme="light">
@@ -607,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#连接内网"><span class="nav-number">1.</span> <span class="nav-text">连接内网</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#连接外网"><span class="nav-number">2.</span> <span class="nav-text">连接外网</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vim"><span class="nav-number">1.1.</span> <span class="nav-text">Vim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vundle"><span class="nav-number">1.2.</span> <span class="nav-text">Vundle</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-YCM"><span class="nav-number">2.</span> <span class="nav-text">Install YCM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-libclang"><span class="nav-number">3.</span> <span class="nav-text">Install libclang</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-the-pre-built-binary"><span class="nav-number">3.1.</span> <span class="nav-text">Using the pre-built binary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compile-from-source"><span class="nav-number">3.2.</span> <span class="nav-text">Compile from source</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile-the-ycm-core"><span class="nav-number">4.</span> <span class="nav-text">Compile the ycm_core</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Test-Installation"><span class="nav-number">5.</span> <span class="nav-text">Test Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Issues"><span class="nav-number">6.</span> <span class="nav-text">Issues</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GLIBC-Error"><span class="nav-number">6.1.</span> <span class="nav-text">GLIBC Error</span></a></li></ol></li></ol></div>
             
 
           </div>
