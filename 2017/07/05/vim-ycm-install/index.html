@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Kejie Wang">
 <meta property="og:description" content="YouCompleteMe (YCM) is a fast, powerful code completion engine for vim. But unlike the other vim plugins which are easy to install, YCM needs to complier to install. This article will briefly introduc">
 <meta property="og:image" content="/images/vim-ycm-install/test.png">
-<meta property="og:updated_time" content="2017-07-05T05:14:32.000Z">
+<meta property="og:updated_time" content="2017-08-12T04:44:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="A vim autocomplete plugin - YouCompleteMe installation guide">
 <meta name="twitter:description" content="YouCompleteMe (YCM) is a fast, powerful code completion engine for vim. But unlike the other vim plugins which are easy to install, YCM needs to complier to install. This article will briefly introduc">
@@ -136,13 +136,13 @@
 
 
 
-  <title>A vim autocomplete plugin - YouCompleteMe installation guide | Kejie Wang</title>
+  <title>A vim autocomplete plugin - YouCompleteMe installation guide | Kejie Wang</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
-<script>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '',
@@ -388,7 +388,7 @@
 <p><code>git clone https://github.com/vim/vim.git</code></p>
 </li>
 <li><p>Configure and Install</p>
-<p><code>cd vim &amp;&amp; ./configure --enable-pythoninterp --with-python-config-dir=/home/kjwang/anaconda2/lib/python2.7/config</code></p>
+<p><code>cd vim &amp;&amp; ./configure --enable-pythoninterp --with-python-config-dir=/usr/bin</code></p>
 <p><code>make &amp;&amp; make install</code></p>
 </li>
 </ul>
@@ -440,10 +440,12 @@
 <p>Now you can find the <strong><em>ycm_core</em></strong> in <strong><em>~/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so</em></strong></p>
 <h2 id="Test-Installation"><a href="#Test-Installation" class="headerlink" title="Test Installation"></a>Test Installation</h2><p>Open a test file and enter some words to check whether it works.</p>
 <p><img src="/images/vim-ycm-install/test.png" alt=""></p>
-<h2 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a>Issues</h2><h3 id="GLIBC-Error"><a href="#GLIBC-Error" class="headerlink" title="GLIBC Error"></a>GLIBC Error</h3><p>I use the python from anaconda2 and there is an problem when I finish the installation.</p>
-<p><code>lib/libstdc++.so.6: version &#39;GLIBCXX_3.4.20&#39; not found</code></p>
+<h2 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a>Issues</h2><h3 id="GLIBC-Error"><a href="#GLIBC-Error" class="headerlink" title="GLIBC Error"></a>GLIBC Error</h3><p><strong>I use the python from anaconda2 and there is an problem when I finish the installation.</strong></p>
+<p><strong><code>lib/libstdc++.so.6: version &#39;GLIBCXX_3.4.20&#39; not found</code></strong></p>
 <p>Install the libgcc package to solve</p>
 <p><code>conda install libgcc</code></p>
+<h3 id="Python-version"><a href="#Python-version" class="headerlink" title="Python version"></a>Python version</h3><p><strong>I compile the vim using python in anaconda but ycm is unavaiable. The issue is<code>YouCompleteMe unavailable: dlopen(/Users/jack/anaconda2/lib/python2.7/lib-dynload/_io.so, 2)</code></strong></p>
+<p>Compile the vim using system python.</p>
 
       
     </div>
@@ -599,7 +601,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -645,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vim"><span class="nav-number">1.1.</span> <span class="nav-text">Vim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vundle"><span class="nav-number">1.2.</span> <span class="nav-text">Vundle</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-YCM"><span class="nav-number">2.</span> <span class="nav-text">Install YCM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-libclang"><span class="nav-number">3.</span> <span class="nav-text">Install libclang</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-the-pre-built-binary"><span class="nav-number">3.1.</span> <span class="nav-text">Using the pre-built binary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compile-from-source"><span class="nav-number">3.2.</span> <span class="nav-text">Compile from source</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile-the-ycm-core"><span class="nav-number">4.</span> <span class="nav-text">Compile the ycm_core</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Test-Installation"><span class="nav-number">5.</span> <span class="nav-text">Test Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Issues"><span class="nav-number">6.</span> <span class="nav-text">Issues</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GLIBC-Error"><span class="nav-number">6.1.</span> <span class="nav-text">GLIBC Error</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vim"><span class="nav-number">1.1.</span> <span class="nav-text">Vim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vundle"><span class="nav-number">1.2.</span> <span class="nav-text">Vundle</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-YCM"><span class="nav-number">2.</span> <span class="nav-text">Install YCM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-libclang"><span class="nav-number">3.</span> <span class="nav-text">Install libclang</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-the-pre-built-binary"><span class="nav-number">3.1.</span> <span class="nav-text">Using the pre-built binary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compile-from-source"><span class="nav-number">3.2.</span> <span class="nav-text">Compile from source</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile-the-ycm-core"><span class="nav-number">4.</span> <span class="nav-text">Compile the ycm_core</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Test-Installation"><span class="nav-number">5.</span> <span class="nav-text">Test Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Issues"><span class="nav-number">6.</span> <span class="nav-text">Issues</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GLIBC-Error"><span class="nav-number">6.1.</span> <span class="nav-text">GLIBC Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-version"><span class="nav-number">6.2.</span> <span class="nav-text">Python version</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -916,7 +918,7 @@
         showTime(Counter);
       }
     });
-  </script>
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
