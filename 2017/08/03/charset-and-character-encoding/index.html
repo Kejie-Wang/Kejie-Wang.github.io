@@ -380,15 +380,19 @@
 
       
         <p>Opening a document downloaded from Internet usually displays garbled code, most of which are caused by  opening with an incorrect encoding. You may hear many encoding character sets, such as ASCII, Unicode, UTF-8, UTF-16 and so on. Most of us will be confused by these encoding and this article will introduce the details of some encodings and their differences between them.</p>
-<a id="more"></a>
-<h2 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h2><p>ASCII  abbreviated <strong>A</strong>merican <strong>S</strong>tandard <strong>C</strong>ode for <strong>I</strong>nformation <strong>I</strong>nterchange is a character encoding standard.</p>
+<p>&lt;!--more--&gt;</p>
+<h2>ASCII</h2>
+<p>ASCII  abbreviated <strong>A</strong>merican <strong>S</strong>tandard <strong>C</strong>ode for <strong>I</strong>nformation <strong>I</strong>nterchange is a character encoding standard.</p>
 <p><img src="/images/character-encoding/asciifull.gif" alt="asciifull"></p>
 <p>It uses 7 bits to devote a character and thus there are 128 (2^7) characters from 0x00 to 0x7F. The standard ASCII contains only the lowercase letters a-z, uppercase letters A-Z,  numbers 0-9, basic punctuations and some control codes.</p>
-<h2 id="GB2312-GBK"><a href="#GB2312-GBK" class="headerlink" title="GB2312, GBK"></a>GB2312, GBK</h2><p>Ascii can meet most of demands when the computer only widely used in the America and the some western countries. But how to represent the Chinese characters became a big problem when Chinese want to use computer too. And thus some encoding stardard methods were developed. GB2312 is backward compatible with ASCII and it uses one byte (8 bits with leading zero) is same as ASCII but two bytes greater than 127 (each byte with leading 1) to represent Chinese characters. It totally contains 7445 characters including 6763 Chinese characters and 682 other characters. Though GB2312 can meet 99.75% usages of Chinese characters, it doesn’t support some uncommon characters and GBK was developed for supporting more characters.</p>
-<h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><p>With the populariry of computer in the world, each country developed a individual encoding method for supporting their language like gb2312. But there are not compatible and it can be a big problem when it need exchange information on Internet.</p>
+<h2>GB2312, GBK</h2>
+<p>Ascii can meet most of demands when the computer only widely used in the America and the some western countries. But how to represent the Chinese characters became a big problem when Chinese want to use computer too. And thus some encoding stardard methods were developed. GB2312 is backward compatible with ASCII and it uses one byte (8 bits with leading zero) is same as ASCII but two bytes greater than 127 (each byte with leading 1) to represent Chinese characters. It totally contains 7445 characters including 6763 Chinese characters and 682 other characters. Though GB2312 can meet 99.75% usages of Chinese characters, it doesn't support some uncommon characters and GBK was developed for supporting more characters.</p>
+<h2>Unicode</h2>
+<p>With the populariry of computer in the world, each country developed a individual encoding method for supporting their language like gb2312. But there are not compatible and it can be a big problem when it need exchange information on Internet.</p>
 <p>Therefore, an character set including all languages is need. Then Unciode came which assigns each character a unique number called <strong>code point</strong>. The latest version of Unicode (Unicode 10.0) contains 136,755 characters.</p>
 <p>Unicode can be implemented by different character encodings such as UTF-8, UTF-16, UTF-32, UCS-2 and so on.</p>
-<h3 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h3><p>UTF-8 is a variable-length character encoding capable of encoding all possible Unicode code points. It was designed to be backward compatible with ASCII and to avoid the complications of endiness (Big-end or Little-end).</p>
+<h3>UTF-8</h3>
+<p>UTF-8 is a variable-length character encoding capable of encoding all possible Unicode code points. It was designed to be backward compatible with ASCII and to avoid the complications of endiness (Big-end or Little-end).</p>
 <table>
 <thead>
 <tr>
@@ -420,9 +424,12 @@
 </tr>
 </tbody>
 </table>
-<h3 id="UCS-2"><a href="#UCS-2" class="headerlink" title="UCS-2"></a>UCS-2</h3><p>UCS-2 simply use two bytes for each character and thus it can only encode 65536 code points, the so-called Basic Multilingual Plane (BMP). And thus many Unicode characters are beyond the reach of UCS-2.</p>
-<h3 id="UTF-16"><a href="#UTF-16" class="headerlink" title="UTF-16"></a>UTF-16</h3><p>UTF=16 extends UCS-2 by using the same 16 bits as UCS-2 and use 32 bits for the others planes. Since UTF-16 use 2 bytes as an unit and thus the byte order matters. To recoginize the byte order of code unit, UTF-16 allows a <strong>Byte Order Mark (BOM)</strong> to precede the first actual coded value. The BOM with code point value U+FEFF is an invisible zero-width non-breaking space character. The BOM in UTF-16BE (UTF-16 Big Endian) is 0xFEFF but 0xFFFE in UTF-16LE (UTF-16 Little Endian). Older Windows NT system use UCS-2 and UTF-16 is used for text in OS API in Microsoft Windows 2000/XP/2003/7/8.</p>
-<h3 id="UTF-32"><a href="#UTF-32" class="headerlink" title="UTF-32"></a>UTF-32</h3><p>UTF-32 is a fixed length encoding which uses 4 bytes to represente a character. The main advantage of UTF-82 is that the Unicode character is indexable since it is all 4 bytes aligned but it is NOT space efficient since characters beyond BMP are rarely used. And same as UTF-16, UTF-32 do NOT have endianness defined.</p>
+<h3>UCS-2</h3>
+<p>UCS-2 simply use two bytes for each character and thus it can only encode 65536 code points, the so-called Basic Multilingual Plane (BMP). And thus many Unicode characters are beyond the reach of UCS-2.</p>
+<h3>UTF-16</h3>
+<p>UTF=16 extends UCS-2 by using the same 16 bits as UCS-2 and use 32 bits for the others planes. Since UTF-16 use 2 bytes as an unit and thus the byte order matters. To recoginize the byte order of code unit, UTF-16 allows a <strong>Byte Order Mark (BOM)</strong> to precede the first actual coded value. The BOM with code point value U+FEFF is an invisible zero-width non-breaking space character. The BOM in UTF-16BE (UTF-16 Big Endian) is 0xFEFF but 0xFFFE in UTF-16LE (UTF-16 Little Endian). Older Windows NT system use UCS-2 and UTF-16 is used for text in OS API in Microsoft Windows 2000/XP/2003/7/8.</p>
+<h3>UTF-32</h3>
+<p>UTF-32 is a fixed length encoding which uses 4 bytes to represente a character. The main advantage of UTF-82 is that the Unicode character is indexable since it is all 4 bytes aligned but it is NOT space efficient since characters beyond BMP are rarely used. And same as UTF-16, UTF-32 do NOT have endianness defined.</p>
 
       
     </div>
@@ -620,7 +627,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ASCII"><span class="nav-number">1.</span> <span class="nav-text">ASCII</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GB2312-GBK"><span class="nav-number">2.</span> <span class="nav-text">GB2312, GBK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unicode"><span class="nav-number">3.</span> <span class="nav-text">Unicode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UTF-8"><span class="nav-number">3.1.</span> <span class="nav-text">UTF-8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UCS-2"><span class="nav-number">3.2.</span> <span class="nav-text">UCS-2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UTF-16"><span class="nav-number">3.3.</span> <span class="nav-text">UTF-16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UTF-32"><span class="nav-number">3.4.</span> <span class="nav-text">UTF-32</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">ASCII</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">GB2312, GBK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Unicode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">UTF-8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">UCS-2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">UTF-16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.4.</span> <span class="nav-text">UTF-32</span></a></li></ol></li></ol></div>
             
 
           </div>
