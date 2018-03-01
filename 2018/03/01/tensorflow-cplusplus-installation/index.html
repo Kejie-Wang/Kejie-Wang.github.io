@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="vim, plugin, YouCompleteMe," />
+  <meta name="keywords" content="tensorflow," />
 
 
 
@@ -90,19 +90,17 @@
 
 
 
-<meta name="description" content="YouCompleteMe (YCM) is a fast, powerful code completion engine for vim. But unlike the other vim plugins which are easy to install, YCM needs to complier to install. This article will briefly introduc">
-<meta name="keywords" content="vim, plugin, YouCompleteMe">
+<meta name="description" content="Currently, building a c++ tensorflow program requires creating your project in the tensorflow source code tree and compile it with bazel togather with tensorflow source code. But in some cases, we may">
+<meta name="keywords" content="tensorflow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="A vim autocomplete plugin - YouCompleteMe installation guide">
-<meta property="og:url" content="www.wangkejie.me/2017/07/05/vim-ycm-install/index.html">
+<meta property="og:title" content="An introduction to package tensorflow c++ library">
+<meta property="og:url" content="www.wangkejie.me/2018/03/01/tensorflow-cplusplus-installation/index.html">
 <meta property="og:site_name" content="Kejie Wang">
-<meta property="og:description" content="YouCompleteMe (YCM) is a fast, powerful code completion engine for vim. But unlike the other vim plugins which are easy to install, YCM needs to complier to install. This article will briefly introduc">
-<meta property="og:image" content="/images/vim-ycm-install/test.png">
-<meta property="og:updated_time" content="2017-10-25T11:21:54.000Z">
+<meta property="og:description" content="Currently, building a c++ tensorflow program requires creating your project in the tensorflow source code tree and compile it with bazel togather with tensorflow source code. But in some cases, we may">
+<meta property="og:updated_time" content="2018-03-01T08:19:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="A vim autocomplete plugin - YouCompleteMe installation guide">
-<meta name="twitter:description" content="YouCompleteMe (YCM) is a fast, powerful code completion engine for vim. But unlike the other vim plugins which are easy to install, YCM needs to complier to install. This article will briefly introduc">
-<meta name="twitter:image" content="/images/vim-ycm-install/test.png">
+<meta name="twitter:title" content="An introduction to package tensorflow c++ library">
+<meta name="twitter:description" content="Currently, building a c++ tensorflow program requires creating your project in the tensorflow source code tree and compile it with bazel togather with tensorflow source code. But in some cases, we may">
 
 
 
@@ -130,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="www.wangkejie.me/2017/07/05/vim-ycm-install/"/>
+  <link rel="canonical" href="www.wangkejie.me/2018/03/01/tensorflow-cplusplus-installation/"/>
 
 
 
 
 
-  <title>A vim autocomplete plugin - YouCompleteMe installation guide | Kejie Wang</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>An introduction to package tensorflow c++ library | Kejie Wang</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -294,7 +292,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="www.wangkejie.me/2017/07/05/vim-ycm-install/">
+    <link itemprop="mainEntityOfPage" href="www.wangkejie.me/2018/03/01/tensorflow-cplusplus-installation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kejie Wang">
@@ -311,7 +309,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">A vim autocomplete plugin - YouCompleteMe installation guide</h1>
+          <h1 class="post-title" itemprop="name headline">An introduction to package tensorflow c++ library</h1>
         
 
         <div class="post-meta">
@@ -323,8 +321,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-05T13:14:32+08:00">
-                2017-07-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-01T15:10:46+08:00">
+                2018-03-01
               </time>
             
 
@@ -334,6 +332,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ml/" itemprop="url" rel="index">
+                    <span itemprop="name">ml</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -342,8 +362,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/07/05/vim-ycm-install/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="www.wangkejie.me/2017/07/05/vim-ycm-install/" itemprop="commentCount">0</span> comments
+                <a href="/2018/03/01/tensorflow-cplusplus-installation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="www.wangkejie.me/2018/03/01/tensorflow-cplusplus-installation/" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
@@ -351,7 +371,7 @@
 
           
           
-             <span id="/2017/07/05/vim-ycm-install/" class="leancloud_visitors" data-flag-title="A vim autocomplete plugin - YouCompleteMe installation guide">
+             <span id="/2018/03/01/tensorflow-cplusplus-installation/" class="leancloud_visitors" data-flag-title="An introduction to package tensorflow c++ library">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -379,76 +399,59 @@
       
 
       
-        <p><a href="http://valloric.github.io/YouCompleteMe/#intro" target="_blank" rel="external">YouCompleteMe</a> (YCM) is a fast, powerful code completion engine for vim. But unlike the other vim plugins which are easy to install, YCM needs to complier to install. This article will briefly introduce the full installation guide of YCM.</p>
+        <p>Currently, building a c++ tensorflow program requires creating your project in the tensorflow source code tree and compile it with bazel togather with tensorflow source code. But in some cases, we may want to use tensorflow as a bazel-indepent library and can be linked with. The official tensorflow has not provided a tutorial about how to build a standalone tensorflow c++ library. This blog will introduce how to compile tensorflow source code and package tensorflow c++ library as a bazel-independent use.</p>
 <a id="more"></a>
-<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>Before you install the ycm, make sure the follow packages have been installed:</p>
-<h3 id="Vim"><a href="#Vim" class="headerlink" title="Vim"></a>Vim</h3><p>Ensure that your version of Vim is at least <strong>7.4.1578</strong> and that is has support for Python 2 or Python 3 scripting. Enter <code>vim -version</code> in the terminal to check the vim version. Typpe<code>vim --version | grep python</code> to check the Python support. If a plus(+) not a minus (-) before Python2 or Python3, then the vim support Python. If not, follow the guide to install vim8.0 with Python support.</p>
+<h2 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h2><p>Using <a href="https://www.bazel.build/" target="_blank" rel="external">bazel</a>, an open-source build and test tools developed by google, to build tensorflow is officially suppoorted. Follow the <a href="https://docs.bazel.build/versions/master/install.html" target="_blank" rel="external">instruction</a> to install the bazel. Here are a simple note on how to install bazel on Ubunut.</p>
 <ul>
-<li><p>Download the <a href="https://github.com/vim/vim" target="_blank" rel="external">vim</a> source</p>
-<p><code>git clone https://github.com/vim/vim.git</code></p>
+<li><p><strong>Install required packages</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install pkg-config zip g++ zlib1g-dev unzip python</div></pre></td></tr></table></figure>
 </li>
-<li><p>Install some dependencies</p>
-<p><code>sudo apt-get install libncurses5-dev python2.7-dev</code> </p>
+<li><p><strong>Download bazel from [Github releases page</strong>](<a href="https://github.com/bazelbuild/bazel/releases" target="_blank" rel="external">https://github.com/bazelbuild/bazel/releases</a>)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://github.com/bazelbuild/bazel/releases/download/0.5.4/bazel-0.5.4-installer-linux-x86_64.sh</div></pre></td></tr></table></figure>
 </li>
-<li><p>Configure and Install</p>
-<p><code>cd vim &amp;&amp; ./configure --enable-pythoninterp --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu</code></p>
-<p><code>make &amp;&amp; make install</code></p>
+<li><p><strong>Run the installer</strong></p>
 </li>
 </ul>
-<h3 id="Vundle"><a href="#Vundle" class="headerlink" title="Vundle"></a>Vundle</h3><p>Vundle is a vim plugin manager and follow the installion guide in <a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="external">Vundle</a> to install.</p>
-<h2 id="Install-YCM"><a href="#Install-YCM" class="headerlink" title="Install YCM"></a>Install YCM</h2><p>Install YCM with Vundle is a recommended way. WithVundle, adding a <code>Plugin &#39;Valloric/YouCompleteMe&#39;</code> line to your <a href="http://vimhelp.appspot.com/starting.txt.html#vimrc" target="_blank" rel="external">vimrc</a> and execute <code>PluginInstall</code> in vim.</p>
-<p>And the enter the YCM repository directory and run follow command to fetch the YCM’s dependencies.</p>
-<p><code>git submodule update --init --recursive</code></p>
-<h2 id="Install-libclang"><a href="#Install-libclang" class="headerlink" title="Install libclang"></a>Install libclang</h2><p>The semantic completion for C-family languages need libclang and you can jump this step if you do NOT need it.</p>
-<h3 id="Using-the-pre-built-binary"><a href="#Using-the-pre-built-binary" class="headerlink" title="Using the pre-built binary"></a>Using the pre-built binary</h3><p>Download the pre-built binary from <a href="http://releases.llvm.org/download.html" target="_blank" rel="external">llvm</a> for your corresponding system. But sometimes this can be failed for some different dependencies version and you can build from the source. </p>
-<h3 id="Compile-from-source"><a href="#Compile-from-source" class="headerlink" title="Compile from source"></a>Compile from source</h3><ul>
-<li><p>Download the source code from <a href="http://releases.llvm.org/download.html" target="_blank" rel="external">llvm</a></p>
-<p>Download the llvm, clang, compiler-rt and clang-tools-extra packages and extract the source code.</p>
-<p><code>wget http://releases.llvm.org/4.0.1/llvm-4.0.1.src.tar.xz</code></p>
-<p><code>wget http://releases.llvm.org/4.0.1/cfe-4.0.1.src.tar.xz</code></p>
-<p><code>wget http://releases.llvm.org/4.0.1/compiler-rt-4.0.1.src.tar.xz</code></p>
-<p><code>wget http://releases.llvm.org/4.0.1/clang-tools-extra-4.0.1.src.tar.xz</code></p>
+<p>If you want to use tensorflow gpu version, <a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="external">cuda toolkit</a> and <a href="https://developer.nvidia.com/cudnn" target="_blank" rel="external">cudnn</a> are required. There are many tutorials about how to install cuda and cudnn and therefore here will not introduce them.</p>
+<h2 id="Compile-tensorflow"><a href="#Compile-tensorflow" class="headerlink" title="Compile tensorflow"></a>Compile tensorflow</h2><ul>
+<li><p><strong>Download tensorflow code from <a href="https://github.com/tensorflow/tensorflow/releases" target="_blank" rel="external">Github releases page</a>.</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> Download the source code (Take 1.5.0 version as example)</div><div class="line"><span class="meta">$</span> wget https://github.com/tensorflow/tensorflow/archive/v1.5.0.tar.gz</div><div class="line"><span class="meta">#</span> Extract the code</div><div class="line"><span class="meta">$</span> tar -zxf v1.5.0.tar.gz</div></pre></td></tr></table></figure>
+<p>Using git clone to get the latest code on Github maybe ok. Get a copy of tensorflow source code anyway.</p>
 </li>
-<li><p>Move the source code</p>
-<p><code>mv llvm-4.0.1.src llvm</code></p>
-<p><code>mv cfe-4.0.1.src llvm/tools/clang</code></p>
-<p><code>mv clang-tools-extra-4.0.1.src llvm/tools/clang/tools/extra</code></p>
-<p><code>mv compiler-rt-4.0.1.src llvm/projects/compiler-rt</code></p>
+<li><p><strong>Configure your compile.</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd tensorflow-1.5.0 &amp;&amp; ./configure</div></pre></td></tr></table></figure>
+<p>If you do not want to an interactive configure, you can export the configuration using environment variables. Here is an example configuration.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">export CC_OPT_FLAGS="-march=native"</div><div class="line">export TF_NEED_GCP=0</div><div class="line">export TF_NEED_HDFS=0</div><div class="line">export TF_NEED_OPENCL=0</div><div class="line">export TF_NEED_OPENCL_SYCL=0</div><div class="line">export TF_NEED_TENSORRT=0</div><div class="line">export TF_NEED_JEMALLOC=1</div><div class="line">export TF_NEED_VERBS=0</div><div class="line">export TF_NEED_MKL=1</div><div class="line">export TF_DOWNLOAD_MKL=1</div><div class="line">export TF_NEED_MPI=0</div><div class="line">export TF_ENABLE_XLA=1</div><div class="line">export TF_NEED_S3=0</div><div class="line">export TF_NEED_GDR=0</div><div class="line">export TF_CUDA_CLANG=0</div><div class="line">export TF_SET_ANDROID_WORKSPACE=0</div><div class="line">export TF_NEED_KAFKA=0</div><div class="line">export PYTHON_BIN_PATH="$(which python)"</div><div class="line">export PYTHON_LIB_PATH="$($PYTHON_BIN_PATH -c 'import site; print(site.getsitepackages()[-2])')"</div><div class="line">export TF_NEED_CUDA=1</div><div class="line">export TF_CUDA_VERSION=8.0</div><div class="line">export CUDA_TOOLKIT_PATH=/usr/local/cuda</div><div class="line">export TF_CUDA_COMPUTE_CAPABILITIES="3.5,5.2,6.1,6.2"</div><div class="line">export TF_CUDNN_VERSION=5</div><div class="line">export CUDNN_INSTALL_PATH=/usr/lib/x86_64-linux-gnu</div><div class="line">export GCC_HOST_COMPILER_PATH=/usr/bin/gcc</div><div class="line">export TF_CUDA_CLANG=0</div><div class="line">export TF_SET_ANDROID_WORKSPACE=''</div></pre></td></tr></table></figure>
 </li>
-<li><p>Build the LLVM and clang</p>
-<p><code>mkdir build &amp;&amp; cd build</code></p>
-<p><code>cmake -G &quot;Unix Makefiles&quot; ../llvm</code></p>
+<li><p><strong>Compile tensorflow</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bazel build -c opt --config=cuda --copt=-march=native tensorflow:libtensorflow_cc.so</div></pre></td></tr></table></figure>
 </li>
-</ul>
-<h2 id="Compile-the-ycm-core"><a href="#Compile-the-ycm-core" class="headerlink" title="Compile the ycm_core"></a>Compile the <em>ycm_core</em></h2><p>Before you compile the ycm_core, make sure that the <a href="https://cmake.org/download/" target="_blank" rel="external">cmake</a> has been installed.</p>
+<li><p><strong>Installation</strong></p>
+<p>Take the <code>/usr/local/tensorflow</code> as example installation prefix.</p>
 <ul>
-<li><p>Create the build directory</p>
-<p><code>mkdir ~/ycm_build &amp;&amp; cd ~/ycm_build</code></p>
-</li>
-<li><p>Generate the makefiles</p>
+<li><strong>Create the installation directory.</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mkdir -p /usr/local/tensorflow/include /usr/local/tensorflow/lib</div></pre></td></tr></table></figure>
 <ul>
-<li><p>No semantic support</p>
-<p><code>cmake -G &quot;Unix Makefiles&quot; . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp</code></p>
-</li>
-<li><p>Semantic support</p>
-<p><code>cmake -G &quot;Unix Makefiles&quot; -DPATH_TO_LLVM_ROOT=llvm_root_dir . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp</code></p>
-<p>Where <strong><em>llvm_root_dir</em></strong> is the root dir where you extract the downloaded binary distribution.</p>
+<li><strong>Copy the header files</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sudo cp -r tensorflow /usr/local/tensorflow/include</div><div class="line">sudo cp -r third_party /usr/local/tensorflow/include</div><div class="line">sudo cp bazel-genfiles/tensorflow /usr/local/tensorflow/include</div><div class="line"><span class="meta">#</span> Delete the files that are not header files</div><div class="line">sudo find /usr/local/tensorflow/include -type f ! -name "*.h" -delete</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>Copy the third party header files</strong></li>
+</ul>
+<p>The header files of tensorflow may include some header files of third party library, e.g. <strong>Eigen</strong>. And thus we must also copy there header files otherwise it will can not find these header files. But there are so many third party libraries that tensorflow depends on and there are maintained by bazel and finding these files can be troublesome. Luckily, tensorflow contrib provides a script to download these dependencies.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> Download dependencies</div><div class="line">./tensorflow/contrib/makefile/download_dependencies.sh</div><div class="line"><span class="meta">#</span> Copy to include</div><div class="line"> sudo cp -r tensorflow/contrib/makefile/downloads /usr/local/tensorflow/include/tensorflow/contrib/makefile</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>Add tensorflow library directory to library path</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo echo /usr/local/tensorflow/lib &gt; /ect/ld.so.conf.d/tensorflow.conf</div><div class="line">sudo ldconfig</div></pre></td></tr></table></figure>
+<p>For those non-sudo user, add the path into LD_LIBRARY_PATH can be ok.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export LD_LIBRARY_PATH=/usr/local/tensorflow/lib:$LD_LIBRARY_PATH</div></pre></td></tr></table></figure>
 </li>
 </ul>
-</li>
-<li><p>Compile</p>
-<p><code>cmake --build . --target ycm_core --config Release</code></p>
-</li>
-</ul>
-<p>Now you can find the <strong><em>ycm_core</em></strong> in <strong><em>~/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so</em></strong></p>
-<h2 id="Test-Installation"><a href="#Test-Installation" class="headerlink" title="Test Installation"></a>Test Installation</h2><p>Open a test file and enter some words to check whether it works.</p>
-<p><img src="/images/vim-ycm-install/test.png" alt=""></p>
-<h2 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a>Issues</h2><h3 id="GLIBC-Error"><a href="#GLIBC-Error" class="headerlink" title="GLIBC Error"></a>GLIBC Error</h3><p><strong>I use the python from anaconda2 and there is an problem when I finish the installation.</strong></p>
-<p><strong><code>lib/libstdc++.so.6: version &#39;GLIBCXX_3.4.20&#39; not found</code></strong></p>
-<p>Install the libgcc package to solve</p>
-<p><code>conda install libgcc</code></p>
-<h3 id="Python-version"><a href="#Python-version" class="headerlink" title="Python version"></a>Python version</h3><p><strong>I compile the vim using python in anaconda but ycm is unavaiable. The issue is<code>YouCompleteMe unavailable: dlopen(/Users/jack/anaconda2/lib/python2.7/lib-dynload/_io.so, 2)</code></strong></p>
-<p>Compile the vim using system python.</p>
+<h2 id="Compile-your-tensorflow-code"><a href="#Compile-your-tensorflow-code" class="headerlink" title="Compile your tensorflow code"></a>Compile your tensorflow code</h2><p>For exmaple, there are a c++ source code using tensorflow called <code>example.cc</code>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">g++ -std=c++11 \</div><div class="line">    -I /usr/local/tensorflow/include \</div><div class="line">    -I /usr/local/tensorflow/include/third_party \</div><div class="line">    -I /usr/local/tensorflow/include/tensorflow/contrib/makefile/downloads/eigen \</div><div class="line">    -I /usr/local/tensorflow/include/tensorflow/contrib/makefile/downloads/nsync \</div><div class="line">    -I /usr/local/tensorflow/include/tensorflow/contrib/makefile/downloads/nsync/public \</div><div class="line">    -L /usr/local/tensorflow/lib \</div><div class="line">    -ltensorflow_cc \</div><div class="line">    -ltensorflow_framework \</div><div class="line">    exmaple.cc</div></pre></td></tr></table></figure>
+<p>You can also use make, cmake or bazel to build your code.</p>
 
       
     </div>
@@ -478,7 +481,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/vim-plugin-YouCompleteMe/" rel="tag"># vim, plugin, YouCompleteMe</a>
+            <a href="/tags/tensorflow/" rel="tag"># tensorflow</a>
           
         </div>
       
@@ -491,8 +494,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/12/shadowsocks/" rel="next" title="Shadowsocks服务器搭建以及不同终端的客户端配置">
-                <i class="fa fa-chevron-left"></i> Shadowsocks服务器搭建以及不同终端的客户端配置
+              <a href="/2018/01/08/remote-gui-app-in-docker/" rel="next" title="Run GUI app in docker on a remote server">
+                <i class="fa fa-chevron-left"></i> Run GUI app in docker on a remote server
               </a>
             
           </div>
@@ -500,10 +503,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/03/charset-and-character-encoding/" rel="prev" title="Charset and Character Encoding">
-                Charset and Character Encoding <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -530,7 +529,7 @@
   <div class="comments" id="comments">
     
       <div class="fb-comments"
-           data-href="www.wangkejie.me/2017/07/05/vim-ycm-install/"
+           data-href="www.wangkejie.me/2018/03/01/tensorflow-cplusplus-installation/"
            data-numposts="10"
            data-width="100%"
            data-colorscheme="light">
@@ -650,7 +649,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vim"><span class="nav-number">1.1.</span> <span class="nav-text">Vim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vundle"><span class="nav-number">1.2.</span> <span class="nav-text">Vundle</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-YCM"><span class="nav-number">2.</span> <span class="nav-text">Install YCM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-libclang"><span class="nav-number">3.</span> <span class="nav-text">Install libclang</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-the-pre-built-binary"><span class="nav-number">3.1.</span> <span class="nav-text">Using the pre-built binary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compile-from-source"><span class="nav-number">3.2.</span> <span class="nav-text">Compile from source</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile-the-ycm-core"><span class="nav-number">4.</span> <span class="nav-text">Compile the ycm_core</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Test-Installation"><span class="nav-number">5.</span> <span class="nav-text">Test Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Issues"><span class="nav-number">6.</span> <span class="nav-text">Issues</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GLIBC-Error"><span class="nav-number">6.1.</span> <span class="nav-text">GLIBC Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-version"><span class="nav-number">6.2.</span> <span class="nav-text">Python version</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisite"><span class="nav-number">1.</span> <span class="nav-text">Prerequisite</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile-tensorflow"><span class="nav-number">2.</span> <span class="nav-text">Compile tensorflow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compile-your-tensorflow-code"><span class="nav-number">3.</span> <span class="nav-text">Compile your tensorflow code</span></a></li></ol></div>
             
 
           </div>
