@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="encoding, ascii, unicode, utf-8, utf-16, utf-32," />
+  <meta name="keywords" content="ca, ssl, san, openssl," />
 
 
 
@@ -90,19 +90,17 @@
 
 
 
-<meta name="description" content="Opening a document downloaded from Internet usually displays garbled code, most of which are caused by  opening with an incorrect encoding. You may hear many encoding character sets, such as ASCII, Un">
-<meta name="keywords" content="encoding, ascii, unicode, utf-8, utf-16, utf-32">
+<meta name="description" content="This article will introduce how to create a trusted CA  (Certificate Authority) and use it to sign a SAN  (Subject Alternative Name) certificate. Once you have installed the CA in a machine, then all">
+<meta name="keywords" content="ca, ssl, san, openssl">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Charset and Character Encoding">
-<meta property="og:url" content="www.wangkejie.me/2017/08/03/charset-and-character-encoding/index.html">
+<meta property="og:title" content="Creating a trusted CA and self signed SAN certificate by Openssl">
+<meta property="og:url" content="www.wangkejie.me/2018/08/07/Creating_a_trusted_CA_with_SAN/index.html">
 <meta property="og:site_name" content="Kejie Wang">
-<meta property="og:description" content="Opening a document downloaded from Internet usually displays garbled code, most of which are caused by  opening with an incorrect encoding. You may hear many encoding character sets, such as ASCII, Un">
-<meta property="og:image" content="/images/character-encoding/asciifull.gif">
-<meta property="og:updated_time" content="2017-11-02T15:56:38.000Z">
+<meta property="og:description" content="This article will introduce how to create a trusted CA  (Certificate Authority) and use it to sign a SAN  (Subject Alternative Name) certificate. Once you have installed the CA in a machine, then all">
+<meta property="og:updated_time" content="2018-09-15T15:33:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Charset and Character Encoding">
-<meta name="twitter:description" content="Opening a document downloaded from Internet usually displays garbled code, most of which are caused by  opening with an incorrect encoding. You may hear many encoding character sets, such as ASCII, Un">
-<meta name="twitter:image" content="/images/character-encoding/asciifull.gif">
+<meta name="twitter:title" content="Creating a trusted CA and self signed SAN certificate by Openssl">
+<meta name="twitter:description" content="This article will introduce how to create a trusted CA  (Certificate Authority) and use it to sign a SAN  (Subject Alternative Name) certificate. Once you have installed the CA in a machine, then all">
 
 
 
@@ -130,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="www.wangkejie.me/2017/08/03/charset-and-character-encoding/"/>
+  <link rel="canonical" href="www.wangkejie.me/2018/08/07/Creating_a_trusted_CA_with_SAN/"/>
 
 
 
 
 
-  <title>Charset and Character Encoding | Kejie Wang</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Creating a trusted CA and self signed SAN certificate by Openssl | Kejie Wang</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -294,7 +292,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="www.wangkejie.me/2017/08/03/charset-and-character-encoding/">
+    <link itemprop="mainEntityOfPage" href="www.wangkejie.me/2018/08/07/Creating_a_trusted_CA_with_SAN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kejie Wang">
@@ -311,7 +309,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Charset and Character Encoding</h1>
+          <h1 class="post-title" itemprop="name headline">Creating a trusted CA and self signed SAN certificate by Openssl</h1>
         
 
         <div class="post-meta">
@@ -323,8 +321,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-03T21:25:32+08:00">
-                2017-08-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-07T00:00:00+08:00">
+                2018-08-07
               </time>
             
 
@@ -342,8 +340,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/03/charset-and-character-encoding/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="www.wangkejie.me/2017/08/03/charset-and-character-encoding/" itemprop="commentCount">0</span> comments
+                <a href="/2018/08/07/Creating_a_trusted_CA_with_SAN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="www.wangkejie.me/2018/08/07/Creating_a_trusted_CA_with_SAN/" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
@@ -351,7 +349,7 @@
 
           
           
-             <span id="/2017/08/03/charset-and-character-encoding/" class="leancloud_visitors" data-flag-title="Charset and Character Encoding">
+             <span id="/2018/08/07/Creating_a_trusted_CA_with_SAN/" class="leancloud_visitors" data-flag-title="Creating a trusted CA and self signed SAN certificate by Openssl">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -379,50 +377,33 @@
       
 
       
-        <p>Opening a document downloaded from Internet usually displays garbled code, most of which are caused by  opening with an incorrect encoding. You may hear many encoding character sets, such as ASCII, Unicode, UTF-8, UTF-16 and so on. Most of us will be confused by these encoding and this article will introduce the details of some encodings and their differences between them.</p>
+        <p>This article will introduce how to create a trusted CA  (Certificate Authority) and use it to sign a SAN  (Subject Alternative Name) certificate. Once you have installed the CA in a machine, then all certificate issued by the CA will be trusted, And with SAN, a certificate can support multiple domains.</p>
 <a id="more"></a>
-<h2 id="ASCII"><a href="#ASCII" class="headerlink" title="ASCII"></a>ASCII</h2><p>ASCII  abbreviated <strong>A</strong>merican <strong>S</strong>tandard <strong>C</strong>ode for <strong>I</strong>nformation <strong>I</strong>nterchange is a character encoding standard.</p>
-<p><img src="/images/character-encoding/asciifull.gif" alt="asciifull"></p>
-<p>It uses 7 bits to devote a character and thus there are 128 (2^7) characters from 0x00 to 0x7F. The standard ASCII contains only the lowercase letters a-z, uppercase letters A-Z,  numbers 0-9, basic punctuations and some control codes.</p>
-<h2 id="GB2312-GBK"><a href="#GB2312-GBK" class="headerlink" title="GB2312, GBK"></a>GB2312, GBK</h2><p>Ascii can meet most of demands when the computer only widely used in the America and the some western countries. But how to represent the Chinese characters became a big problem when Chinese want to use computer too. And thus some encoding stardard methods were developed. GB2312 is backward compatible with ASCII and it uses one byte (8 bits with leading zero) is same as ASCII but two bytes greater than 127 (each byte with leading 1) to represent Chinese characters. It totally contains 7445 characters including 6763 Chinese characters and 682 other characters. Though GB2312 can meet 99.75% usages of Chinese characters, it doesn’t support some uncommon characters and GBK was developed for supporting more characters.</p>
-<h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><p>With the populariry of computer in the world, each country developed a individual encoding method for supporting their language like gb2312. But there are not compatible and it can be a big problem when it need exchange information on Internet.</p>
-<p>Therefore, an character set including all languages is need. Then Unciode came which assigns each character a unique number called <strong>code point</strong>. The latest version of Unicode (Unicode 10.0) contains 136,755 characters.</p>
-<p>Unicode can be implemented by different character encodings such as UTF-8, UTF-16, UTF-32, UCS-2 and so on.</p>
-<h3 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h3><p>UTF-8 is a variable-length character encoding capable of encoding all possible Unicode code points. It was designed to be backward compatible with ASCII and to avoid the complications of endiness (Big-end or Little-end).</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Number of bytes</th>
-<th style="text-align:center">Code points range</th>
-<th style="text-align:center">Bytes representation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">U+0000 ~ U+007F</td>
-<td style="text-align:center">0XXXXXX</td>
-</tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center">U+0080 ~ U+07FF</td>
-<td style="text-align:center">110XXXXX 10XXXXXX</td>
-</tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">U+0800 ~ U+FFFF</td>
-<td style="text-align:center">1110XXXX 10XXXXXX 10XXXXXX</td>
-</tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center">U+10000 ~ U+10FFF</td>
-<td style="text-align:center">11110XXX 10XXXXXX 10XXXXXX 10XXXXXX</td>
-</tr>
-</tbody>
-</table>
-<h3 id="UCS-2"><a href="#UCS-2" class="headerlink" title="UCS-2"></a>UCS-2</h3><p>UCS-2 simply use two bytes for each character and thus it can only encode 65536 code points, the so-called Basic Multilingual Plane (BMP). And thus many Unicode characters are beyond the reach of UCS-2.</p>
-<h3 id="UTF-16"><a href="#UTF-16" class="headerlink" title="UTF-16"></a>UTF-16</h3><p>UTF=16 extends UCS-2 by using the same 16 bits as UCS-2 and use 32 bits for the others planes. Since UTF-16 use 2 bytes as an unit and thus the byte order matters. To recoginize the byte order of code unit, UTF-16 allows a <strong>Byte Order Mark (BOM)</strong> to precede the first actual coded value. The BOM with code point value U+FEFF is an invisible zero-width non-breaking space character. The BOM in UTF-16BE (UTF-16 Big Endian) is 0xFEFF but 0xFFFE in UTF-16LE (UTF-16 Little Endian). Older Windows NT system use UCS-2 and UTF-16 is used for text in OS API in Microsoft Windows 2000/XP/2003/7/8.</p>
-<h3 id="UTF-32"><a href="#UTF-32" class="headerlink" title="UTF-32"></a>UTF-32</h3><p>UTF-32 is a fixed length encoding which uses 4 bytes to represente a character. The main advantage of UTF-82 is that the Unicode character is indexable since it is all 4 bytes aligned but it is NOT space efficient since characters beyond BMP are rarely used. And same as UTF-16, UTF-32 do NOT have endianness defined.</p>
+<h2 id="Customize-Openssl-configuration-file"><a href="#Customize-Openssl-configuration-file" class="headerlink" title="Customize Openssl configuration file"></a>Customize Openssl configuration file</h2><p>Firstly, it is to customize your Openssl configuration file based on the template <em>openssl.cnf</em> on the system. This template configutation file can be found at <strong><em>/usr/lib/ssl/openssl.cnf</em></strong>.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export Domain="mydomain.com" # e.g. wangkejie.me</div><div class="line"><span class="meta">#</span> Copy the template configuration</div><div class="line">cp /usr/lib/ssl/openssl.cnf $&#123;Domain&#125;.cnf</div></pre></td></tr></table></figure>
+<h3 id="Customize-CA-section"><a href="#Customize-CA-section" class="headerlink" title="Customize CA section"></a>Customize CA section</h3><p>Under the <strong>[ v3_ca ]</strong> section, uncomment the following values to create a CA for self signed certificate.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[ v3_ca ]</div><div class="line">subjectKeyIdentifier=hash</div><div class="line">authorityKeyIdentifier=keyid:always,issuer</div><div class="line">basicConstraints = critical, CA:TRUE, pathlen:3</div><div class="line">keyUsage = critical, cRLSign, keyCertSign</div><div class="line">nsCertType = sslCA, emailCA</div></pre></td></tr></table></figure>
+<h3 id="Customize-SAN-certificate-section"><a href="#Customize-SAN-certificate-section" class="headerlink" title="Customize SAN certificate section"></a>Customize SAN certificate section</h3><p>Uncomment the <strong>req_extensions</strong> line to use <strong>v3</strong> extensions.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">req_extensions = v3_req</div></pre></td></tr></table></figure>
+<p>Then under <strong>[ v3_req ]</strong> section, uncomment the following values and add your domain to issue a SAN certificate.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[ v3_req ]</div><div class="line">basicConstraints = CA:FALSE</div><div class="line">keyUsage = nonRepudiation, digitalSignature, keyEncipherment</div><div class="line"><span class="meta">#</span>extendedKeyUsage=serverAuth</div><div class="line">subjectAltName = @alt_names</div><div class="line"></div><div class="line">[ alt_names ]</div><div class="line">DNS.1 = mydomain.com </div><div class="line">DNS.2 = *.dydomain.com</div></pre></td></tr></table></figure>
+<h2 id="Create-CA-certificate"><a href="#Create-CA-certificate" class="headerlink" title="Create CA certificate"></a>Create CA certificate</h2><p>Now we can use our customized configuration file to create the CA certificate.</p>
+<p>Firstly, generate CA private key:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> This will request a password.</div><div class="line"><span class="meta">#</span> Please keep this file and the password secreat, it will be use to issue certificate.</div><div class="line">openssl genrsa -aes256 -out ca.key.pem 2048</div></pre></td></tr></table></figure>
+<p>Secondly, use Openssl to create the self-signed root CA certificate:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> The subj may contains the information of CA.</div><div class="line">openssl req -new -x509 -subj "/C=CN" -extensions v3_ca -days 3650 -key ca.key.pem -sha256 -out ca.pem -config $&#123;Domain&#125;.cnf</div></pre></td></tr></table></figure>
+<p>The we can get the root CA certificate <strong>ca.pem</strong>. We can use openssl to verify it:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl x509 -in ca.pem -text -noout</div></pre></td></tr></table></figure>
+<p>There will be a flag  <strong>CA:TRUE</strong> indicates that the certificate will be recognized as a root CA certificate.</p>
+<h2 id="Create-Server-certificate-signed-by-CA"><a href="#Create-Server-certificate-signed-by-CA" class="headerlink" title="Create Server certificate signed by CA"></a>Create Server certificate signed by CA</h2><p>After the root certificate created, we can use it to issue a server certificate.</p>
+<p>First to generate the private key:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl genrsa -out $&#123;Domain&#125;.key.pem 2048</div></pre></td></tr></table></figure>
+<p>Then create the server certificate:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span> Generate the signing certificate request</div><div class="line"><span class="meta">#</span> This will create a file $&#123;Domain&#125;.csr</div><div class="line"><span class="meta">#</span> The subj can be filled with the information of the CA</div><div class="line">openssl req -subj "/CN=$&#123;Domain&#125;" -extensions v3_req -sha256 -new -key $&#123;Domain&#125;.key.pem -out $&#123;Domain&#125;.csr</div><div class="line"><span class="meta">#</span> Then use the signing request and CA to create a server certificate. </div><div class="line">openssl x509 -req -extensions v3_req -days 3650 -sha256 -in $&#123;Domain&#125;.csr -CA ca.pem -CAkey ca.key.pem -CAcreateserial -out $&#123;Domain&#125;.crt -extfile $&#123;Domain&#125;.cnf</div></pre></td></tr></table></figure>
+<p>Now we can verity the certificate:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl x509 -in $&#123;Domain&#125;.crt -text -noout</div></pre></td></tr></table></figure>
+<p>It will show the information of the CA in <strong>“Issuer”</strong> field and <strong>“Subject Alternative Name”</strong> field contains the domain. e.g.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Issuer:</div><div class="line">	CN=</div><div class="line">DNS: wangkejie.me</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -452,7 +433,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/encoding-ascii-unicode-utf-8-utf-16-utf-32/" rel="tag"># encoding, ascii, unicode, utf-8, utf-16, utf-32</a>
+            <a href="/tags/ca-ssl-san-openssl/" rel="tag"># ca, ssl, san, openssl</a>
           
         </div>
       
@@ -465,8 +446,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/05/vim-ycm-install/" rel="next" title="A vim autocomplete plugin - YouCompleteMe installation guide">
-                <i class="fa fa-chevron-left"></i> A vim autocomplete plugin - YouCompleteMe installation guide
+              <a href="/2018/03/01/tensorflow-cplusplus-installation/" rel="next" title="An introduction to package tensorflow c++ library">
+                <i class="fa fa-chevron-left"></i> An introduction to package tensorflow c++ library
               </a>
             
           </div>
@@ -474,10 +455,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/08/remote-gui-app-in-docker/" rel="prev" title="Run GUI app in docker on a remote server">
-                Run GUI app in docker on a remote server <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -504,7 +481,7 @@
   <div class="comments" id="comments">
     
       <div class="fb-comments"
-           data-href="www.wangkejie.me/2017/08/03/charset-and-character-encoding/"
+           data-href="www.wangkejie.me/2018/08/07/Creating_a_trusted_CA_with_SAN/"
            data-numposts="10"
            data-width="100%"
            data-colorscheme="light">
@@ -624,7 +601,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ASCII"><span class="nav-number">1.</span> <span class="nav-text">ASCII</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GB2312-GBK"><span class="nav-number">2.</span> <span class="nav-text">GB2312, GBK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unicode"><span class="nav-number">3.</span> <span class="nav-text">Unicode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UTF-8"><span class="nav-number">3.1.</span> <span class="nav-text">UTF-8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UCS-2"><span class="nav-number">3.2.</span> <span class="nav-text">UCS-2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UTF-16"><span class="nav-number">3.3.</span> <span class="nav-text">UTF-16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UTF-32"><span class="nav-number">3.4.</span> <span class="nav-text">UTF-32</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Customize-Openssl-configuration-file"><span class="nav-number">1.</span> <span class="nav-text">Customize Openssl configuration file</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Customize-CA-section"><span class="nav-number">1.1.</span> <span class="nav-text">Customize CA section</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Customize-SAN-certificate-section"><span class="nav-number">1.2.</span> <span class="nav-text">Customize SAN certificate section</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-CA-certificate"><span class="nav-number">2.</span> <span class="nav-text">Create CA certificate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-Server-certificate-signed-by-CA"><span class="nav-number">3.</span> <span class="nav-text">Create Server certificate signed by CA</span></a></li></ol></div>
             
 
           </div>
